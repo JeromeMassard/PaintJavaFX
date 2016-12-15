@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root maxHeight="150.0" maxWidth="200.0" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+    <center>
+        <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" preserveRatio="true">
+            <image>
+                <Image url="@../images/test.png" />
+            </image>
+        </ImageView>
+    </center>
+    
+    <bottom>
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints percentWidth="33.0" />
+                <ColumnConstraints percentWidth="34.0" />
+                <ColumnConstraints percentWidth="33.0" />
+            </columnConstraints>
+            
+            <rowConstraints>
+                <RowConstraints percentHeight="50.0" />
+                <RowConstraints percentHeight="50.0" />
+            </rowConstraints>
+            
+            <children>
+                <CheckBox fx:id="visible" selected="true"                      GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <CheckBox fx:id="locked"  selected="false"                     GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <Button   fx:id="edit" text=" "                                GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                
+                <TextField fx:id="name" text="Nouveau Calque" editable="false" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="3" />
+            </children>
+        </GridPane>
+    </bottom>
+</fx:root>

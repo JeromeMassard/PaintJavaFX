@@ -8,13 +8,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root maxHeight="150.0" maxWidth="200.0" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="100" maxWidth="200" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
     <center>
-        <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" preserveRatio="true">
-            <image>
-                <Image url="@../images/test.png" />
-            </image>
-        </ImageView>
+        <ImageView fx:id="imageView" fitHeight="100" fitWidth="200" preserveRatio="true" />
     </center>
     
     <bottom>
@@ -31,11 +27,10 @@
             </rowConstraints>
             
             <children>
-                <CheckBox fx:id="visible" selected="true"                      GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                <CheckBox fx:id="locked"  selected="false"                     GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                <Button   fx:id="edit" text=" "                                GridPane.columnIndex="2" GridPane.rowIndex="0" />
-                
-                <TextField fx:id="name" text="Nouveau Calque" editable="false" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="3" />
+                <CheckBox  fx:id="visible" selected="true"    text="visible"                         GridPane.halignment="CENTER" />
+                <CheckBox  fx:id="locked"  selected="false"   text="locked" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                <Button    fx:id="edit" onAction="#editName"  text=""       GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+                <TextField fx:id="name" onKeyPressed="#editText" disable="true" editable="false" text="Nouveau Calque" GridPane.columnSpan="3" GridPane.rowIndex="1" />
             </children>
         </GridPane>
     </bottom>

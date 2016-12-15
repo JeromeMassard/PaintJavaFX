@@ -6,6 +6,7 @@
 package paint;
 
 import com.sun.rowset.internal.Row;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -59,11 +60,18 @@ public class FXMLMainWinController implements Initializable {
     
     public void addLayer()
     {
+        try{
        Layer newLayer = new Layer();
+       Layer.rootWidth.set(layerZone.getWidth());
        layerList.add(newLayer);
        newLayer.setName("Layer n°"+ layerList.indexOf(newLayer));
        observableList.setAll(layerList);
        layerZone.setItems(observableList);
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
     }
     
     public void mergeLayer()

@@ -3,6 +3,8 @@ package paint;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import javafx.beans.property.*;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableArray;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
@@ -12,8 +14,8 @@ public class Layer extends BorderPane {
 
 private ObjectProperty<Image> image = new SimpleObjectProperty<>();
     
-    public static int rootHeight;
-    public static int rootWidth;
+    public static ObservableValue<Double> rootHeight;
+    public static ObservableValue<Double> rootWidth;
 
     private boolean active = false;
     

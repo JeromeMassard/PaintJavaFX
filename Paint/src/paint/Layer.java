@@ -32,17 +32,21 @@ public class Layer extends BorderPane implements Initializable {
     /** Is edit Button active*/
     private boolean active = false;
         
-    public Layer() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/layer.fxml"));
-        fxmlLoader.setRoot(this);
-        fxmlLoader.setController(this);
-        fxmlLoader.load();
-        
-        this.prefHeightProperty().addListener((obs, oldVal, newVal) -> this.setHeight(rootHeight.getValue()));
-        this.prefWidthProperty().addListener((obs, oldVal, newVal) -> this.setHeight(rootWidth.getValue()));
-        
-        imageView.fitHeightProperty().bind(rootHeight);
-        imageView.fitWidthProperty().bind(rootWidth);
+    public Layer() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/layer.fxml"));
+            fxmlLoader.setRoot(this);
+            fxmlLoader.setController(this);
+            fxmlLoader.load();
+
+            this.prefHeightProperty().addListener((obs, oldVal, newVal) -> this.setHeight(rootHeight.getValue()));
+            this.prefWidthProperty().addListener((obs, oldVal, newVal) -> this.setHeight(rootWidth.getValue()));
+
+            imageView.fitHeightProperty().bind(rootHeight);
+            imageView.fitWidthProperty().bind(rootWidth);
+        } catch (IOException | RuntimeException e) {
+            System.err.println(e.getMessage());
+        }
     }
     
     @Override
@@ -119,7 +123,7 @@ public class Layer extends BorderPane implements Initializable {
     
     /**
      * Get visibility of the Layer
-     * @return true if the Layer is visible <br /> false if not
+     * @return true if the Layer is visible, false if not
      */
     public boolean getVisibility() {
         return visibilityProperty().get();
@@ -127,7 +131,7 @@ public class Layer extends BorderPane implements Initializable {
     
     /**
      * Get locking of the Layer
-     * @return true if the Layer is locked <br /> false if not
+     * @return true if the Layer is locked, false if not
      */
     public boolean isLocked() {
         return lockedProperty().get();

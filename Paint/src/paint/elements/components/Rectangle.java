@@ -33,6 +33,10 @@ public class Rectangle extends Component {
     @Override
     public void draw(Graphics g) {
         g.setColor(color);
-        g.fillRect(x, y, width, height);
+        
+        if (fill)
+            g.fillRect(x, y, width, height);
+        else
+            g.drawRect(x, y, width, height);
     }
 }

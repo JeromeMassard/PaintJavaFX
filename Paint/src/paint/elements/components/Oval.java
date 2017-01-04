@@ -34,6 +34,10 @@ public class Oval extends Component {
     @Override
     public void draw(Graphics g) {
         g.setColor(color);
-        g.drawOval(x, y, width, height);
+        
+        if (fill)
+            g.fillOval(x, y, width, height);
+        else
+            g.drawOval(x, y, width, height);
     }
 }

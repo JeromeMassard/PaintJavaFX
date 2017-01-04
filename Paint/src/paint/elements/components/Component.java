@@ -9,12 +9,14 @@ public class Component extends Element {
     protected int y;
     protected int thickness;
     protected Color color;
+    protected boolean fill;
     
     public Component(int posX,int posY)
     {
         x = posX; 
         y = posY;
-        color= Color.black; 
+        color= Color.black;
+        fill = false;
     }
     
     public void setThickness(int thickness)

@@ -24,6 +24,10 @@ public class Circle extends Component {
     @Override
     public void draw(Graphics g) {
         g.setColor(color);
-        g.drawOval(x, y, radius, radius);
+        
+        if (fill)
+            g.fillOval(x, y, radius, radius);
+        else
+            g.drawOval(x, y, radius, radius);
     }
 }

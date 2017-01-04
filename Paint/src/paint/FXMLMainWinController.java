@@ -5,26 +5,18 @@
  */
 package paint;
 
-import com.sun.rowset.internal.Row;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
-import paint.*;
+
 /**
  * FXML Controller class
  *
@@ -60,18 +52,13 @@ public class FXMLMainWinController implements Initializable {
     
     public void addLayer()
     {
-        try{
        Layer newLayer = new Layer();
        Layer.rootWidth.set(layerZone.getWidth());
        layerList.add(newLayer);
        newLayer.setName("Layer n°"+ layerList.indexOf(newLayer));
        observableList.setAll(layerList);
        layerZone.setItems(observableList);
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }
+        
     }
     
     public void mergeLayer()

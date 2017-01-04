@@ -82,7 +82,7 @@
                 <children>
                     <Button GridPane.rowIndex="0" onAction="#addLayer" prefWidth="123456" >Add</Button>
                     <Button GridPane.rowIndex="1" onAction="#mergeLayer" prefWidth="123456">Merge</Button>
-                    <Button GridPane.rowIndex="2" onAction="#delLayer" prefWidth="123456">Delete</Button>
+                    <Button GridPane.rowIndex="2" onAction="#deleteLayer" prefWidth="123456">Delete</Button>
                 </children>
             </GridPane>
          </children>

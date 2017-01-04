@@ -21,7 +21,6 @@ public class Drawing extends Application{
     private static double Height;
     private static double Width;
     
-    
     public Drawing(double H,double W)
     {
         Height = H;

@@ -11,8 +11,8 @@ import javafx.scene.input.*;
 import javafx.scene.layout.*;
 
 public class Layer extends BorderPane implements Initializable {
-    public static SimpleDoubleProperty rootHeight = new SimpleDoubleProperty(100);
-    public static SimpleDoubleProperty rootWidth = new SimpleDoubleProperty(200);
+    public static DoubleProperty rootHeight = new SimpleDoubleProperty(100);
+    public static DoubleProperty rootWidth = new SimpleDoubleProperty(200);
     
     @FXML
     private ImageView imageView;

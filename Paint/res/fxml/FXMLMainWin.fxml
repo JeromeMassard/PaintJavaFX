@@ -41,7 +41,7 @@
                 </tabs>
                      
             </TabPane>
-            <Button GridPane.columnIndex="1" onAction="#rmTab"> - </Button>
+            <Button GridPane.columnIndex="1" onAction="#removeTab"> - </Button>
             <Button GridPane.columnIndex="2" onAction="#addTab" >+</Button>
             
          </children>

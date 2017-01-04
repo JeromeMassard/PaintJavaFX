@@ -1,10 +1,11 @@
 package paint.elements.effects.deformations;
 
+import java.awt.Graphics;
 import paint.elements.effects.Coloration;
 
 public class Blur extends Coloration {
     @Override
-    public void draw() {
+    public void draw(Graphics g) {
         
     }
 }

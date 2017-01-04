@@ -11,8 +11,8 @@ import javafx.scene.input.*;
 import javafx.scene.layout.*;
 
 public class Layer extends BorderPane implements Initializable {
-    public static DoubleProperty rootHeight = new SimpleDoubleProperty(100);
-    public static DoubleProperty rootWidth = new SimpleDoubleProperty(200);
+    private static DoubleProperty rootHeight = new SimpleDoubleProperty(100);
+    private static DoubleProperty rootWidth = new SimpleDoubleProperty(200);
     
     @FXML
     private ImageView imageView;
@@ -52,6 +52,22 @@ public class Layer extends BorderPane implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         edit.setBackground(new Background(Images.EDIT_FALSE));
+    }
+    
+    public static DoubleProperty getRootHeight() {
+        return rootHeight;
+    }
+    
+    public static DoubleProperty getRootWidth() {
+        return rootWidth;
+    }
+    
+    public static void setRootHeight(double height) {
+        rootHeight.set(height);
+    }
+    
+    public static void setRootWidth(double width) {
+        rootWidth.set(width);
     }
     
     /**

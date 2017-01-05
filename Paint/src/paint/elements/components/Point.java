@@ -3,6 +3,7 @@ package paint.elements.components;
 import javafx.scene.canvas.GraphicsContext;
 
 public class Point extends Component {
+    /** Is sets to true of the point is drew as a circle, if false the point is drew as a square*/
     private boolean circle;
     
     public Point(int posX, int posY, boolean circle) {
@@ -16,7 +17,7 @@ public class Point extends Component {
 
     @Override
     public void draw(GraphicsContext g) {
-        g.setFill(color);
+        g.setFill(primaryColor);
         
         if (circle)
             g.fillOval(x, y, thickness, thickness);

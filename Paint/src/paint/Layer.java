@@ -11,7 +11,9 @@ import javafx.scene.input.*;
 import javafx.scene.layout.*;
 
 public class Layer extends BorderPane implements Initializable {
+    /** The Height of the Layer elements */
     private static DoubleProperty rootHeight = new SimpleDoubleProperty(100);
+    /** The Width of the Layer elements */
     private static DoubleProperty rootWidth = new SimpleDoubleProperty(200);
     
     @FXML
@@ -29,8 +31,9 @@ public class Layer extends BorderPane implements Initializable {
     
     @FXML
     private Button edit;
-    /** Is edit Button active*/
-    private boolean active = false;
+    
+    /** Is edit Button active */
+    private boolean active;
         
     public Layer() {
         try {
@@ -47,6 +50,8 @@ public class Layer extends BorderPane implements Initializable {
         } catch (IOException | RuntimeException e) {
             System.err.println(e.getMessage());
         }
+        
+        this.active = false;
     }
     
     @Override
@@ -54,18 +59,34 @@ public class Layer extends BorderPane implements Initializable {
         edit.setBackground(new Background(Images.EDIT_FALSE));
     }
     
+    /**
+     * Returns the rootHeight
+     * @return rootHeight
+     */
     public static DoubleProperty getRootHeight() {
         return rootHeight;
     }
     
+    /**
+     * Returns the rootWidth
+     * @return rootWidth
+     */
     public static DoubleProperty getRootWidth() {
         return rootWidth;
     }
     
+    /**
+     * Sets the rootHeight
+     * @param height 
+     */
     public static void setRootHeight(double height) {
         rootHeight.set(height);
     }
     
+    /**
+     * Sets the rootWidth
+     * @param width 
+     */
     public static void setRootWidth(double width) {
         rootWidth.set(width);
     }

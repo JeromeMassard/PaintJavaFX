@@ -1,6 +1,5 @@
 package paint.elements.components;
 
-import java.awt.Graphics;
 import javafx.scene.canvas.GraphicsContext;
 
 /**
@@ -8,8 +7,9 @@ import javafx.scene.canvas.GraphicsContext;
  * @author bilombardy
  */
 public class Oval extends Component {
-
+    /** The width of the oval */
     private int width;
+    /** The height of the oval */
     private int height;
 
     public Oval(int posX, int posY, int width, int height) {
@@ -17,7 +17,11 @@ public class Oval extends Component {
         setWidth(width);
         setHeight(height);
     }
-
+    
+    /**
+     * Sets the width of the oval
+     * @param width 
+     */
     private void setWidth(int width) {
         if (width < 1) {
             width = 1;
@@ -26,6 +30,10 @@ public class Oval extends Component {
         this.width = width;
     }
 
+    /**
+     * Sets the height of the oval
+     * @param height 
+     */
     private void setHeight(int height) {
         if (height < 1) {
             height = 1;
@@ -36,12 +44,23 @@ public class Oval extends Component {
 
     @Override
     public void draw(GraphicsContext g) {
-        g.setFill(color);
         g.setLineWidth(thickness);
         
-        if (fill)
-            g.fillOval(x, y, width, height);
-        else
-            g.strokeOval(x, y, width, height);
+        switch (mode) {
+            case STROKE:
+                g.setStroke(primaryColor);
+                g.strokeOval(x, y, width, height);
+                break;
+            case FILLSTROKE:
+                g.setFill(primaryColor);
+                g.fillOval(x, y, width, height);
+                g.setStroke(secondaryColor);
+                g.strokeOval(x, y, width, height);
+                break;
+            default:
+                g.setFill(primaryColor);
+                g.fillOval(x, y, width, height);
+                break;
+        }
     }
 }

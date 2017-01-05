@@ -7,6 +7,7 @@ import javafx.scene.canvas.GraphicsContext;
  * @author bilombardy
  */
 public class Circle extends Component {
+    /** The radius of the circle */
     private int radius;
 
     public Circle(int posX, int posY, int radius) {
@@ -14,6 +15,10 @@ public class Circle extends Component {
         setRadius(radius);
     }
     
+    /**
+     * Sets the radius of the circle
+     * @param radius 
+     */
     private void setRadius(int radius) {
         if (radius < 1)
             radius = 1;
@@ -23,12 +28,23 @@ public class Circle extends Component {
     
     @Override
     public void draw(GraphicsContext g) {
-        g.setFill(color);
         g.setLineWidth(thickness);
         
-        if (fill)
-            g.fillOval(x, y, radius, radius);
-        else
-            g.strokeOval(x, y, radius, radius);
+        switch (mode) {
+            case STROKE:
+                g.setStroke(primaryColor);
+                g.strokeOval(x, y, radius, radius);
+                break;
+            case FILLSTROKE:
+                g.setFill(primaryColor);
+                g.fillOval(x, y, radius, radius);
+                g.setStroke(secondaryColor);
+                g.strokeOval(x, y, radius, radius);
+                break;
+            default:
+                g.setFill(primaryColor);
+                g.fillOval(x, y, radius, radius);
+                break;
+        }
     }
 }

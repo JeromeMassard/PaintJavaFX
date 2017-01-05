@@ -16,6 +16,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import paint.elements.components.Component;
+import paint.elements.components.Rectangle;
 import paint.elements.components.Square;
 
 /**
@@ -146,10 +147,9 @@ public class FXMLMainWinController implements Initializable {
 
         if (firstClickX != -1 && firstClickY != -1 && secondClickX != -1 && secondClickY != -1) {
             if (e.getButton() == MouseButton.PRIMARY) {
-                Component sq = new Square(firstClickX, firstClickY, (secondClickX - firstClickX));
-                sq.setPrimaryColor(Color.rgb(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256)));
-
-                sq.draw(canvas.getGraphicsContext2D());
+                Component rt = new Rectangle(firstClickX, firstClickY, (secondClickX - firstClickX), (secondClickY - firstClickY));
+                rt.setPrimaryColor(Color.rgb(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256)));
+                rt.draw(canvas.getGraphicsContext2D());
             }
 
             firstClickX = -1;

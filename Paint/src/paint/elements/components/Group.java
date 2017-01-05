@@ -19,6 +19,12 @@ public class Group extends Component {
     public void removeFromCompound(Component c) {
         compound.remove(c);
     }
+    
+    public void setPosition(int newX, int newY)
+    {
+        x = newX;
+        y = newY;
+    }
 
     @Override
     public void draw(GraphicsContext g) {

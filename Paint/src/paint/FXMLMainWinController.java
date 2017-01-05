@@ -13,6 +13,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import paint.elements.components.Component;
+import paint.elements.components.Group;
 import paint.elements.components.Line;
 import paint.elements.components.Point;
 import paint.elements.components.Rectangle;
@@ -83,12 +84,13 @@ public class FXMLMainWinController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
-                
-        Component pt = new Point(20, 50);
-        pt.setThickness(1000);
-        pt.draw(gc);
+        Group carreCol = new Group(0, 0);
+        Group spaceCol = new Group(0, 0);
+        //Component pt = new Point(20, 50);
+        //pt.setThickness(1000);
+        //pt.draw(gc);
         
-        /*
+        
         Square sq1 = new Square(30, 30, 50);
         Square sq2 = new Square(30, 55, 50);
         Square sq3 = new Square(55, 30, 50);
@@ -98,12 +100,26 @@ public class FXMLMainWinController implements Initializable {
         sq2.setColor(Color.rgb(255, 153, 11, 0.5));
         sq3.setColor(Color.rgb(91, 253, 45, 0.5));
         sq4.setColor(Color.rgb(235, 72, 248, 0.5));
-
-        sq1.draw(gc);
-        sq2.draw(gc);
-        sq3.draw(gc);
-        sq4.draw(gc);
-        _*/
+        
+        carreCol.addToCompound(sq1);
+        carreCol.addToCompound(sq2);
+        carreCol.addToCompound(sq3);
+        carreCol.addToCompound(sq4);
+        
+        carreCol.setPosition(0,0);
+        spaceCol.addToCompound(carreCol);
+        carreCol.setPosition(150,0);
+        spaceCol.addToCompound(carreCol);
+        carreCol.setPosition(50,50);
+        spaceCol.addToCompound(carreCol);
+        carreCol.setPosition(100,50);
+        spaceCol.addToCompound(carreCol);
+        carreCol.setPosition(0,0);
+        spaceCol.addToCompound(carreCol);
+        
+        spaceCol.draw(gc);
+        
+        
     }
 
     private String url(String resimagesimagepng) {

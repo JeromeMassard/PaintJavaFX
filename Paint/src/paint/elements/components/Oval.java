@@ -37,6 +37,11 @@ public class Oval extends Component {
     @Override
     public void draw(GraphicsContext g) {
         g.setFill(color);
-        g.fillOval(x, y, width, height);
+        g.setLineWidth(thickness);
+        
+        if (fill)
+            g.fillOval(x, y, width, height);
+        else
+            g.strokeOval(x, y, width, height);
     }
 }

@@ -12,7 +12,9 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
+import paint.elements.components.Component;
 import paint.elements.components.Line;
+import paint.elements.components.Point;
 import paint.elements.components.Rectangle;
 import paint.elements.components.Square;
 
@@ -81,15 +83,16 @@ public class FXMLMainWinController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        /*Line l = new Line(125,21,185,21);
-        l.draw(gc);*/
-
-        int shift = 60;
-
-        Square sq1 = new Square(0 + shift, 0 + shift, 50);
-        Square sq2 = new Square(0 + shift, 25 + shift, 50);
-        Square sq3 = new Square(25 + shift, 0 + shift, 50);
-        Square sq4 = new Square(25 + shift, 25 + shift, 50);
+                
+        Component pt = new Point(20, 50);
+        pt.setThickness(10);
+        pt.draw(gc);
+        
+        /*
+        Square sq1 = new Square(30, 30, 50);
+        Square sq2 = new Square(30, 55, 50);
+        Square sq3 = new Square(55, 30, 50);
+        Square sq4 = new Square(55, 55, 50);
 
         sq1.setColor(Color.rgb(127, 156, 211, 0.5));
         sq2.setColor(Color.rgb(255, 153, 11, 0.5));
@@ -100,6 +103,7 @@ public class FXMLMainWinController implements Initializable {
         sq2.draw(gc);
         sq3.draw(gc);
         sq4.draw(gc);
+        */
     }
 
     private String url(String resimagesimagepng) {

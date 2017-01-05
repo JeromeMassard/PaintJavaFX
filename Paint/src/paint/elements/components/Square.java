@@ -24,6 +24,11 @@ public class Square extends Component {
     @Override
     public void draw(GraphicsContext g) {
         g.setFill(color);
-        g.fillRect(x, y, length, length);
+        g.setLineWidth(thickness);
+       
+        if (fill)
+            g.fillRect(x, y, length, length);
+        else
+            g.strokeRect(x, y, length, length);
     }
 }

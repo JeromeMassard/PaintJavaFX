@@ -1,8 +1,6 @@
 package paint.elements.components;
 
-import java.awt.Graphics;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.Background;
 
 public class Line extends Component {
     

@@ -9,6 +9,7 @@ public class Component extends Element {
     protected int y;
     protected int thickness;
     protected Color color;
+    protected boolean fill;
     
     public Component(int posX,int posY)
     {

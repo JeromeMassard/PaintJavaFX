@@ -1,10 +1,10 @@
 package paint.elements;
 
-import java.awt.Graphics;
+import javafx.scene.canvas.GraphicsContext;
 
 public class Selection extends Element {
     @Override
-    public void draw(Graphics g) {
+    public void draw(GraphicsContext g) {
         
     }
 }

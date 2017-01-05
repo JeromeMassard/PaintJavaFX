@@ -6,6 +6,7 @@
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
+<?import javafx.scene.canvas.*?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -34,7 +35,7 @@
                 <tabs>
                     <Tab text="Untitled Draw 0">
                         <content>
-                            <AnchorPane fx:id="drawingZone" />
+                            <Canvas fx:id="canvas" ></Canvas>
                         </content>
                     </Tab>
                 

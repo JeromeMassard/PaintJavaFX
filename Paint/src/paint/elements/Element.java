@@ -1,7 +1,7 @@
 package paint.elements;
 
-import java.awt.Graphics;
+import javafx.scene.canvas.GraphicsContext;
 
 public abstract class Element {
-    public abstract void draw(Graphics g);
+    public abstract void draw(GraphicsContext g);
 }

@@ -1,6 +1,7 @@
 package paint.elements.components;
 
 import java.awt.Graphics;
+import javafx.scene.canvas.GraphicsContext;
 
 /**
  * 
@@ -31,8 +32,8 @@ public class Rectangle extends Component {
     }
     
     @Override
-    public void draw(Graphics g) {
-        g.setColor(color);
-        g.fillRect(x, y, width, height);
+    public void draw(GraphicsContext g) {
+        g.setFill(color);
+        g.rect(x, y, width, height);
     }
 }

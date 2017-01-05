@@ -9,11 +9,5 @@ public class Point extends Component {
         super(posX, posY);
     }
     
-    public void draw(Graphics g)
-    {
-        g.setColor(color);
-        g.fillOval(x, y, thickness, thickness);
-    }
-    
-    
+
 }

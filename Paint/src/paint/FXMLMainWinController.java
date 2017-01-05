@@ -8,7 +8,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
+import paint.elements.components.Line;
 
 /**
  * FXML Controller class
@@ -23,7 +26,8 @@ public class FXMLMainWinController implements Initializable {
     
     @FXML private ListView layerZone;
     @FXML private TabPane tabContainer; 
-   
+    @FXML private Canvas canvas;
+    
     /**
      * Add a tab on the tab list
      */
@@ -73,7 +77,9 @@ public class FXMLMainWinController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        Line l = new Line(125,21,185,21);
+        l.draw(gc);
     }    
 
     private String url(String resimagesimagepng) {

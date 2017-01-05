@@ -1,11 +1,11 @@
 package paint.elements.effects.deformations;
 
-import java.awt.Graphics;
+import javafx.scene.canvas.GraphicsContext;
 import paint.elements.effects.Coloration;
 
 public class Noise extends Coloration {
     @Override
-    public void draw(Graphics g) {
+    public void draw(GraphicsContext g) {
         
     }
 }

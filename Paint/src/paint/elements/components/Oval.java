@@ -32,8 +32,8 @@ public class Oval extends Component {
     }
     
     @Override
-    public void draw(Graphics g) {
-        g.setColor(color);
-        g.drawOval(x, y, width, height);
+    public void draw(GraphicsContext g) {
+        g.setFill(color);
+        g.fillOval(x, y, width, height);
     }
 }

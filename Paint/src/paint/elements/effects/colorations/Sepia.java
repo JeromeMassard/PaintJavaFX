@@ -1,11 +1,11 @@
 package paint.elements.effects.colorations;
 
-import java.awt.Graphics;
+import javafx.scene.canvas.GraphicsContext;
 import paint.elements.effects.Deformation;
 
 public class Sepia extends Deformation {
     @Override
-    public void draw(Graphics g) {
+    public void draw(GraphicsContext g) {
         
     }
 }

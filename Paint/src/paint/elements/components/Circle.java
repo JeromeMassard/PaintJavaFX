@@ -1,6 +1,6 @@
 package paint.elements.components;
 
-import java.awt.Graphics;
+import javafx.scene.canvas.GraphicsContext;
 
 /**
  *
@@ -22,8 +22,8 @@ public class Circle extends Component {
     }
     
     @Override
-    public void draw(Graphics g) {
-        g.setColor(color);
-        g.drawOval(x, y, radius, radius);
+    public void draw(GraphicsContext g) {
+        g.setFill(color);
+        g.fillOval(x, y, radius, radius);
     }
 }

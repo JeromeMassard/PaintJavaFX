@@ -11,7 +11,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 /**
  *
  * @author jemassard
@@ -23,6 +22,7 @@ public class Paint extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/FXMLMainWin.fxml"));
         Scene scene = new Scene(root,1200, 800);
         
+
         
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -35,5 +35,6 @@ public class Paint extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
     
 }

@@ -1,7 +1,7 @@
 package paint.elements.components;
 
-import java.awt.Color;
-import java.awt.Graphics;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 import paint.elements.Element;
 
 public class Component extends Element {
@@ -14,7 +14,7 @@ public class Component extends Element {
     {
         x = posX; 
         y = posY;
-        color= Color.black; 
+        color= Color.BLACK; 
     }
     
     public void setThickness(int thickness)
@@ -30,7 +30,7 @@ public class Component extends Element {
     }
   
     @Override
-    public void draw(Graphics g) {
+    public void draw(GraphicsContext g) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

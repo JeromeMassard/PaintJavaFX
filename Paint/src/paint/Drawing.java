@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
+import paint.elements.components.*;
 
 /**
  *
@@ -33,8 +34,12 @@ public class Drawing extends Application{
         Group root = new Group();
         Canvas canvas = new Canvas(Width, Height);
         GraphicsContext gc = canvas.getGraphicsContext2D();
+        Line l = new Line(125,21,185,21);
+        l.draw(gc);
+        
         drawShapes(gc);
-        //root.getChildren().add(canvas);
+        
+        root.getChildren().add(canvas);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }

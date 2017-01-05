@@ -1,6 +1,6 @@
 package paint.elements.components;
 
-import java.awt.Graphics;
+import javafx.scene.canvas.GraphicsContext;
 
 /**
  * 
@@ -22,8 +22,8 @@ public class Square extends Component {
     }
     
     @Override
-    public void draw(Graphics g) {
-        g.setColor(color);
+    public void draw(GraphicsContext g) {
+        g.setFill(color);
         g.fillRect(x, y, length, length);
     }
 }

@@ -11,11 +11,12 @@ public class Component extends Element {
     protected Color color;
     protected boolean fill;
     
-    public Component(int posX,int posY)
+    public Component(int posX, int posY)
     {
-        x = posX; 
-        y = posY;
-        color= Color.BLACK; 
+        this.x = posX; 
+        this.y = posY;
+        this.color = Color.BLACK;
+        this.fill = true;
     }
     
     public void setThickness(int thickness)
@@ -27,11 +28,15 @@ public class Component extends Element {
     
     public void setColor(Color newcolor)
     {
-        color = newcolor;
+        this.color = newcolor;
     }
   
+    public void setFill(boolean fill) {
+        this.fill = fill;
+    }
+    
     @Override
     public void draw(GraphicsContext g) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 }

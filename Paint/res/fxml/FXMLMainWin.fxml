@@ -11,177 +11,182 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paint.FXMLMainWinController" >
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES"  percentWidth="80.0" />
-    <ColumnConstraints hgrow="SOMETIMES"  percentWidth="20.0" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints minHeight="8.0" percentHeight="10.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" percentHeight="85.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="0.0" percentHeight="5.0" vgrow="SOMETIMES" />
-  </rowConstraints>
-   <children>
-  <GridPane GridPane.columnIndex="0" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.vgrow="SOMETIMES">
-        <columnConstraints>
-         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="94.0" />
-         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="3.0" />
-         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="3.0" />
-        </columnConstraints>
-        <children>
-           
-            <TabPane fx:id="tabContainer" tabClosingPolicy="UNAVAILABLE" GridPane.columnSpan="3" GridPane.columnIndex="0" >
-              
-                <tabs>
-                    <Tab text="Untitled Draw 0">
-                        <content>
-                            <Canvas fx:id="canvas" ></Canvas>
-                        </content>
-                    </Tab>
-                
-                </tabs>
-                     
-            </TabPane>
-            <Button GridPane.columnIndex="1" onAction="#removeTab"> - </Button>
-            <Button GridPane.columnIndex="2" onAction="#addTab" >+</Button>
-            
-         </children>
-         <rowConstraints>
-            <RowConstraints />
-            <RowConstraints />
-         </rowConstraints>
-  </GridPane>
-      <GridPane fx:id="layerColumn" GridPane.columnIndex="1" GridPane.rowSpan="3" GridPane.vgrow="SOMETIMES" GridPane.hgrow="SOMETIMES">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" percentWidth="1.0" />
-          <ColumnConstraints hgrow="SOMETIMES" percentWidth="99.0" halignment="CENTER" />
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints maxHeight="100.0" minHeight="10.0" percentHeight="10.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="100.0" minHeight="10.0" percentHeight="10.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="100.0" minHeight="10.0" percentHeight="10.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="100.0" minHeight="10.0" percentHeight="10.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="100.0" minHeight="10.0" percentHeight="10.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="100.0" minHeight="10.0" percentHeight="10.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="100.0" minHeight="10.0" percentHeight="10.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="100.0" minHeight="10.0" percentHeight="10.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="100.0" minHeight="10.0" percentHeight="10.0" vgrow="SOMETIMES" />
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paint.FXMLMainWinController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" percentWidth="80.0" />
+        <ColumnConstraints hgrow="SOMETIMES" percentWidth="20.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="8.0" percentHeight="10.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" percentHeight="85.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="0.0" percentHeight="5.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+        <GridPane GridPane.columnIndex="0" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.vgrow="SOMETIMES">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="94.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="3.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="3.0" />
+            </columnConstraints>
+            <children>
+                <TabPane fx:id="tabContainer" tabClosingPolicy="UNAVAILABLE" GridPane.columnIndex="0" GridPane.columnSpan="3">
+                    <tabs>
+                        <Tab text="Untitled Draw 0">
+                            <content>
+                                <Canvas fx:id="canvas" height="650.0" width="960.0" GridPane.columnSpan="3" GridPane.rowIndex="2" />
+                            </content>
+                        </Tab>                
+                    </tabs>
+                </TabPane>
+                    
+                <Button onAction="#removeTab" GridPane.columnIndex="1"> - </Button>
+                <Button onAction="#addTab" GridPane.columnIndex="2"> + </Button>
+            </children>
+            <rowConstraints>
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+            </rowConstraints>
+        </GridPane>
+        
+        <GridPane fx:id="layerColumn" GridPane.columnIndex="1" GridPane.hgrow="SOMETIMES" GridPane.rowSpan="3" GridPane.vgrow="SOMETIMES">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" percentWidth="1.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="99.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="100.0" minHeight="10.0" percentHeight="10.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="100.0" minHeight="10.0" percentHeight="10.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="100.0" minHeight="10.0" percentHeight="10.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="100.0" minHeight="10.0" percentHeight="10.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="100.0" minHeight="10.0" percentHeight="10.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="100.0" minHeight="10.0" percentHeight="10.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="100.0" minHeight="10.0" percentHeight="10.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="100.0" minHeight="10.0" percentHeight="10.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="100.0" minHeight="10.0" percentHeight="10.0" vgrow="SOMETIMES" />
+                <RowConstraints />
 
-            
-        </rowConstraints>
-         <children>
-            <ListView fx:id="layerZone" GridPane.rowSpan="9" orientation="VERTICAL" GridPane.columnIndex="1" GridPane.rowIndex="0" >
+            </rowConstraints>
+            <children>
+                <ListView fx:id="layerZone" orientation="VERTICAL" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.rowSpan="9">
                
-            </ListView>
+                </ListView>
 
-            <GridPane GridPane.rowIndex="9" GridPane.columnIndex="1">
-                <rowConstraints>
-                    <RowConstraints percentHeight="33.0" vgrow="SOMETIMES" />
-                    <RowConstraints percentHeight="33.0" vgrow="SOMETIMES" />
-                    <RowConstraints percentHeight="33.0" vgrow="SOMETIMES" />
-                </rowConstraints>
-                <children>
-                    <Button GridPane.rowIndex="0" onAction="#addLayer" prefWidth="123456" >Add</Button>
-                    <Button GridPane.rowIndex="1" onAction="#mergeLayer" prefWidth="123456">Merge</Button>
-                    <Button GridPane.rowIndex="2" onAction="#deleteLayer" prefWidth="123456">Delete</Button>
-                </children>
-            </GridPane>
-         </children>
-      </GridPane>
-      <GridPane>
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" percentHeight="50.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" percentHeight="50.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <FlowPane fx:id="fpfilemenu" alignment="TOP_CENTER" columnHalignment="CENTER" orientation="VERTICAL" GridPane.vgrow="SOMETIMES">
-               <children>
-                  <Separator prefWidth="200.0" />
-                  <MenuBar maxWidth="Infinity"  prefHeight="30.0" prefWidth="${fpfilemenu.width}">
-                    <menus>
-                      <Menu mnemonicParsing="false" text="File">
-                        <items>
-                          <MenuItem mnemonicParsing="false" text="Close" />
-                        </items>
-                      </Menu>
-                      <Menu mnemonicParsing="false" text="Edit">
-                        <items>
-                          <MenuItem mnemonicParsing="false" text="Delete" />
-                        </items>
-                      </Menu>
-                      <Menu mnemonicParsing="false" text="Effects">
-                        <items>
-                          <MenuItem mnemonicParsing="false" text="Effet1" />
-                          <MenuItem mnemonicParsing="false" text="Bruit" />
-                          <Menu mnemonicParsing="false" text="Flou">
-                              <items>
-                                  <MenuItem mnemonicParsing="false" text="Flou gaussien" />
-                                  <MenuItem mnemonicParsing="false" text="Flou de zone" />
-                              </items>
-                            </Menu>
-                          <MenuItem mnemonicParsing="false" text="blablablabla" />
-                          <Menu mnemonicParsing="false" text="Coloration">
-                            <items>
-                                <MenuItem mnemonicParsing="false" text="sepia" />
-                                <MenuItem mnemonicParsing="false" text="Noir et Blanc" />
-                            </items>
-                          </Menu>
-                        </items>
-                      </Menu>
-                      <Menu mnemonicParsing="false" text="Help">
-                        <items>
-                          <MenuItem mnemonicParsing="false" text="About" />
-                        </items>
-                      </Menu>
-                    </menus>
-                  </MenuBar>
-               </children>
-            </FlowPane>
-            <ToolBar prefHeight="40.0" prefWidth="200.0" GridPane.rowIndex="1">
-              <items>
-                  <SplitMenuButton mnemonicParsing="false" text="SplitMenuButton">
+                <GridPane GridPane.columnIndex="1" GridPane.rowIndex="9">
+                    <rowConstraints>
+                        <RowConstraints percentHeight="33.0" vgrow="SOMETIMES" />
+                        <RowConstraints percentHeight="33.0" vgrow="SOMETIMES" />
+                        <RowConstraints percentHeight="33.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Button onAction="#addLayer" prefWidth="123456" GridPane.rowIndex="0">Add</Button>
+                        <Button onAction="#mergeLayer" prefWidth="123456" GridPane.rowIndex="1">Merge</Button>
+                        <Button onAction="#deleteLayer" prefWidth="123456" GridPane.rowIndex="2">Delete</Button>
+                    </children>
+                    <columnConstraints>
+                        <ColumnConstraints />
+                    </columnConstraints>
+                </GridPane>
+            </children>
+        </GridPane>
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" percentHeight="50.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" percentHeight="50.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <FlowPane fx:id="fpfilemenu" alignment="TOP_CENTER" columnHalignment="CENTER" orientation="VERTICAL" GridPane.vgrow="SOMETIMES">
+                    <children>
+                        <Separator prefWidth="200.0" />
+                        <MenuBar maxWidth="Infinity" prefHeight="30.0" prefWidth="${fpfilemenu.width}">
+                            <menus>
+                                <Menu mnemonicParsing="false" text="File">
+                                    <items>
+                                        <MenuItem mnemonicParsing="false" text="Close" />
+                                    </items>
+                                </Menu>
+                                <Menu mnemonicParsing="false" text="Edit">
+                                    <items>
+                                        <MenuItem mnemonicParsing="false" text="Delete" />
+                                    </items>
+                                </Menu>
+                                <Menu mnemonicParsing="false" text="Effects">
+                                    <items>
+                                        <MenuItem mnemonicParsing="false" text="Effet1" />
+                                        <MenuItem mnemonicParsing="false" text="Bruit" />
+                                        <Menu mnemonicParsing="false" text="Flou">
+                                            <items>
+                                                <MenuItem mnemonicParsing="false" text="Flou gaussien" />
+                                                <MenuItem mnemonicParsing="false" text="Flou de zone" />
+                                            </items>
+                                        </Menu>
+                                        <MenuItem mnemonicParsing="false" text="blablablabla" />
+                                        <Menu mnemonicParsing="false" text="Coloration">
+                                            <items>
+                                                <MenuItem mnemonicParsing="false" text="sepia" />
+                                                <MenuItem mnemonicParsing="false" text="Noir et Blanc" />
+                                            </items>
+                                        </Menu>
+                                    </items>
+                                </Menu>
+                                <Menu mnemonicParsing="false" text="Help">
+                                    <items>
+                                        <MenuItem mnemonicParsing="false" text="About" />
+                                    </items>
+                                </Menu>
+                            </menus>
+                        </MenuBar>
+                    </children>
+                </FlowPane>
+                <ToolBar prefHeight="40.0" prefWidth="200.0" GridPane.rowIndex="1">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
-                      <MenuItem mnemonicParsing="false" text="Action 2" />
-                    </items>
-                  </SplitMenuButton>
-                  <ColorPicker />
-                          <GridPane>
+                        <SplitMenuButton mnemonicParsing="false" text="SplitMenuButton">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="Action 1" />
+                                <MenuItem mnemonicParsing="false" text="Action 2" />
+                            </items>
+                        </SplitMenuButton>
+                        <ColorPicker />
+                        <GridPane>
                             <columnConstraints>
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" />
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" />
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" />
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" />
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" />
+                                <ColumnConstraints />
                             </columnConstraints>
 
-                             <children>
+                            <children>
                                 <Label text=" Opacity:" GridPane.columnIndex="0" />
-                                <Spinner fx:id="opacity" editable="true" maxWidth="75" GridPane.columnIndex="1" min="1" initialValue="100" amountToStepBy="1" max="100"  />
+                                <Spinner fx:id="opacity" amountToStepBy="1" editable="true" initialValue="100" max="100" maxWidth="75" min="1" GridPane.columnIndex="1" />
                                 <Label text=" Size : " GridPane.columnIndex="2" />
-                                <Spinner fx:id="size" editable="true" maxWidth="75" GridPane.columnIndex="3"  min="0.5" initialValue="100" amountToStepBy="0.5" max="100" />
+                                <Spinner fx:id="size" amountToStepBy="0.5" editable="true" initialValue="100" max="100" maxWidth="75" min="0.5" GridPane.columnIndex="3" />
                                 <CheckBox mnemonicParsing="false" text="Lisser" GridPane.columnIndex="5" />
-                             </children>
-                          </GridPane>
+                            </children>
+                            <rowConstraints>
+                                <RowConstraints />
+                            </rowConstraints>
+                        </GridPane>
                     
-              </items>
-            </ToolBar>
-         </children>
-      </GridPane>
+                    </items>
+                </ToolBar>
+            </children>
+        </GridPane>
       
-      <GridPane GridPane.columnIndex="0" GridPane.rowIndex="2">
-       <columnConstraints>
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="100.0" />
-        </columnConstraints>
-         <rowConstraints>
-          <RowConstraints minHeight="10.0" percentHeight="100.0" valignment="BOTTOM" vgrow="SOMETIMES" />
-        </rowConstraints>
+        <GridPane GridPane.columnIndex="0" GridPane.rowIndex="2">
+            <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" percentHeight="100.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+            </rowConstraints>
           
             <ProgressBar prefWidth="5000.0" progress="0.0" />
         
-      </GridPane>
-   </children>
+        </GridPane>
+    </children>
 </GridPane>

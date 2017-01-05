@@ -11,76 +11,96 @@ import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
+import javafx.scene.paint.Color;
 import paint.elements.components.Line;
+import paint.elements.components.Rectangle;
+import paint.elements.components.Square;
 
 /**
  * FXML Controller class
  *
  * @author jemassard
  */
-public class FXMLMainWinController implements Initializable {   
+public class FXMLMainWinController implements Initializable {
     public static int numeroTab = 1;
     public static int numeroLayer = 0;
     private List<Layer> layerList = new ArrayList<>();
     ObservableList observableList = FXCollections.observableArrayList();
-    
-    @FXML private ListView layerZone;
-    @FXML private TabPane tabContainer; 
-    @FXML private Canvas canvas;
-    
+
+    @FXML
+    private ListView layerZone;
+    @FXML
+    private TabPane tabContainer;
+    @FXML
+    private Canvas canvas;
+
     /**
      * Add a tab on the tab list
      */
-    public void addTab()
-    {
-       Tab newTab = new Tab();
-       newTab.setText("New Draw n°"+numeroTab);
-       
-       tabContainer.getTabs().add(newTab);
-       ++numeroTab;
+    public void addTab() {
+        Tab newTab = new Tab();
+        Canvas cvs = new Canvas();
+        newTab.setText("New Draw n°" + numeroTab);
+        newTab.contentProperty().set(cvs);
+
+        tabContainer.getTabs().add(newTab);
+        ++numeroTab;
     }
-    
+
     /**
      * Remove a tab on the tab list
      */
-    public void removeTab()
-    {
+    public void removeTab() {
         tabContainer.getTabs().remove(tabContainer.getSelectionModel().getSelectedItem());
     }
-    
+
     /**
      * Add a new Layer on the ListView
      */
-    public void addLayer()
-    {
-       Layer newLayer = new Layer();
-       Layer.setRootWidth(layerZone.getWidth());
-       
-       layerList.add(newLayer);
-       newLayer.setName("Layer n°" + layerList.indexOf(newLayer));
-       
-       observableList.setAll(layerList);
-       layerZone.setItems(observableList);
+    public void addLayer() {
+        Layer newLayer = new Layer();
+        Layer.setRootWidth(layerZone.getWidth());
+
+        layerList.add(newLayer);
+        newLayer.setName("Layer n°" + layerList.indexOf(newLayer));
+
+        observableList.setAll(layerList);
+        layerZone.setItems(observableList);
     }
-    
-    public void mergeLayer()
-    {
-        
+
+    public void mergeLayer() {
+
     }
-    
-    public void deleteLayer()
-    {
+
+    public void deleteLayer() {
         layerList.remove(layerZone.getSelectionModel().getSelectedItem());
         observableList.setAll(layerList);
         layerZone.setItems(observableList);
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        Line l = new Line(125,21,185,21);
-        l.draw(gc);
-    }    
+        /*Line l = new Line(125,21,185,21);
+        l.draw(gc);*/
+
+        int shift = 60;
+
+        Square sq1 = new Square(0 + shift, 0 + shift, 50);
+        Square sq2 = new Square(0 + shift, 25 + shift, 50);
+        Square sq3 = new Square(25 + shift, 0 + shift, 50);
+        Square sq4 = new Square(25 + shift, 25 + shift, 50);
+
+        sq1.setColor(Color.rgb(127, 156, 211, 0.5));
+        sq2.setColor(Color.rgb(255, 153, 11, 0.5));
+        sq3.setColor(Color.rgb(91, 253, 45, 0.5));
+        sq4.setColor(Color.rgb(235, 72, 248, 0.5));
+
+        sq1.draw(gc);
+        sq2.draw(gc);
+        sq3.draw(gc);
+        sq4.draw(gc);
+    }
 
     private String url(String resimagesimagepng) {
         return null;

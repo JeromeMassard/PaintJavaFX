@@ -25,8 +25,8 @@
         <GridPane GridPane.columnIndex="0" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.vgrow="SOMETIMES">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="94.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="3.0"  />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="3.0"  />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="3.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="3.0" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints />
@@ -34,27 +34,27 @@
                 <RowConstraints />
             </rowConstraints>
             <children>
-                <TabPane fx:id="tabContainer" tabClosingPolicy="UNAVAILABLE" GridPane.columnIndex="0" >
+                <TabPane fx:id="tabContainer" tabClosingPolicy="UNAVAILABLE" GridPane.columnIndex="0">
                     <tabs>
                         <Tab text="Untitled Draw 0">
                             <content>
-                                <Canvas fx:id="canvas" height="650.0" width="960.0" GridPane.columnSpan="3" GridPane.rowIndex="2" />
+                                <Canvas fx:id="canvas" height="650.0" onMouseClicked="#onMouseClicked" width="960.0" GridPane.columnSpan="3" GridPane.rowIndex="2" />
                             </content>
                         </Tab>    
                                     
                     </tabs>
                 </TabPane>
-                <GridPane GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex = "0" >
+                <GridPane GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" />
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints vgrow="SOMETIMES" maxHeight="35"/>
+                        <RowConstraints maxHeight="35" vgrow="SOMETIMES" />
                     </rowConstraints>
                     
-                        <Button onAction="#removeTab" GridPane.columnIndex="0" prefWidth="99999" prefHeight="99999"> - </Button>
-                        <Button onAction="#addTab" GridPane.columnIndex="1" prefWidth="99999" prefHeight="99999"> + </Button>
+                        <Button onAction="#removeTab" prefHeight="99999" prefWidth="99999" GridPane.columnIndex="0"> - </Button>
+                        <Button onAction="#addTab" prefHeight="99999" prefWidth="99999" GridPane.columnIndex="1"> + </Button>
                 </GridPane>
             </children>
         </GridPane>

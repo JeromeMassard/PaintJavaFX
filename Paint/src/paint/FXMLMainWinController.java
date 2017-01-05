@@ -85,7 +85,7 @@ public class FXMLMainWinController implements Initializable {
         GraphicsContext gc = canvas.getGraphicsContext2D();
                 
         Component pt = new Point(20, 50);
-        pt.setThickness(10);
+        pt.setThickness(1000);
         pt.draw(gc);
         
         /*
@@ -103,7 +103,7 @@ public class FXMLMainWinController implements Initializable {
         sq2.draw(gc);
         sq3.draw(gc);
         sq4.draw(gc);
-        */
+        _*/
     }
 
     private String url(String resimagesimagepng) {

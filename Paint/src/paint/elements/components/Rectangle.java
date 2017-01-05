@@ -33,6 +33,11 @@ public class Rectangle extends Component {
     @Override
     public void draw(GraphicsContext g) {
         g.setFill(color);
-        g.rect(x, y, width, height);
+        g.setLineWidth(thickness);
+        
+        if (fill)
+            g.fillRect(x, y, width, height);
+       else
+            g.strokeRect(x, y, width, height);
     }
 }

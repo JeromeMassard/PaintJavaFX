@@ -5,26 +5,25 @@ import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
 
 public class Group extends Component {
-    
-    private List<Component> compound = new ArrayList<>();
-    
+    private List<Component> compound;
+
     public Group(int posX, int posY) {
         super(posX, posY);
-        
+        this.compound = new ArrayList<>();
     }
-    
-    public void addToCompound(Component c)
-    {
+
+    public void addToCompound(Component c) {
         compound.add(c);
     }
     
+    public void removeFromCompound(Component c) {
+        compound.remove(c);
+    }
+
     @Override
     public void draw(GraphicsContext g) {
-
-        for (Component c : compound)
-        {
+        compound.forEach((Component c) -> {
             c.draw(g);
-        }
+        });
     }
-    
 }

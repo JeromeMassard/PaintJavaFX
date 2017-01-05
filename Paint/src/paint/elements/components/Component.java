@@ -15,14 +15,17 @@ public class Component extends Element {
     {
         this.x = posX; 
         this.y = posY;
-        this.color = Color.BLACK;
-        this.fill = true;
+        
+        setThickness(1);
+        setColor(Color.BLACK);
+        setFill(true);
     }
     
     public void setThickness(int thickness)
     {
         if(thickness < 1)
             thickness = 1;
+        
         this.thickness = thickness;
     }
     

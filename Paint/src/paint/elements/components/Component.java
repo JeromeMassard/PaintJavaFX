@@ -32,13 +32,28 @@ public class Component extends Element {
     
     public Component(int posX, int posY)
     {
-        this.x = posX; 
-        this.y = posY;
-        
+        this.setPosition(posX, posY);
         this.setThickness(1);
         this.setPrimaryColor(Color.BLACK);
         this.setSecondaryColor(Color.BLACK);
         this.setMode(Mode.FILL);
+    }
+    
+    /**
+     * Sets the new position of the component
+     * 
+     * @param x The new x position
+     * @param y The new y position 
+     */
+    public final void setPosition(int x, int y) {
+        if (x < 0)
+            x = 0;
+        
+        if (y < 0)
+            y = 0;
+                
+        this.x = x;
+        this.y = y;
     }
     
     /**

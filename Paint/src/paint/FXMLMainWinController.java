@@ -11,9 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
-import javafx.scene.paint.Color;
-import paint.elements.components.Component;
-import paint.elements.components.*;
+
 
 /**
  * FXML Controller class
@@ -21,10 +19,13 @@ import paint.elements.components.*;
  * @author jemassard
  */
 public class FXMLMainWinController implements Initializable {
-
+    /**  */
     public static int numeroTab = 1;
+    /**  */
     public static int numeroLayer = 0;
+    /**  */
     private List<Layer> layerList = new ArrayList<>();
+    /**  */
     ObservableList observableList = FXCollections.observableArrayList();
 
     @FXML
@@ -33,7 +34,7 @@ public class FXMLMainWinController implements Initializable {
     private TabPane tabContainer;
     @FXML
     private Canvas canvas;
-
+    
     /**
      * Add a tab on the tab list
      */
@@ -67,11 +68,40 @@ public class FXMLMainWinController implements Initializable {
         observableList.setAll(layerList);
         layerZone.setItems(observableList);
     }
+    
+    public void addLayer(String name) {
+        Layer newLayer = new Layer();
+        Layer.setRootWidth(layerZone.getWidth());
 
+        layerList.add(newLayer);
+        newLayer.setName(name);
+
+        observableList.setAll(layerList);
+        layerZone.setItems(observableList);
+    }
+    
+    private void createBackgroundLayer() {
+        Layer background = new Layer();
+        background.setLocked(true);
+        Layer.setRootWidth(layerZone.getWidth());
+
+        layerList.add(background);
+        background.setName("Background");
+
+        observableList.setAll(layerList);
+        layerZone.setItems(observableList);
+    }
+    
+    /**
+     * 
+     */
     public void mergeLayer() {
 
     }
 
+    /**
+     * 
+     */
     public void deleteLayer() {
         layerList.remove(layerZone.getSelectionModel().getSelectedItem());
         observableList.setAll(layerList);
@@ -80,17 +110,8 @@ public class FXMLMainWinController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        createBackgroundLayer();
         GraphicsContext gc = canvas.getGraphicsContext2D();
         
-        Component cpt = new Square(30, 30, 50);
-        cpt.setPrimaryColor(Color.GRAY);
-        cpt.setSecondaryColor(Color.BLACK);
-        cpt.setThickness(5);
-        cpt.setMode(Component.Mode.FILLSTROKE);
-        cpt.draw(gc);
-    }
-
-    private String url(String resimagesimagepng) {
-        return null;
     }
 }

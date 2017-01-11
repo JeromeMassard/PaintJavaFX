@@ -246,14 +246,14 @@ public class FXMLMainWinController implements Initializable {
         menu.add(new MenuItem("Rectangle"));
         menu.add(new MenuItem("Circle"));
         menu.add(new MenuItem("Line"));
-        menu.add(new MenuItem("Rectangle"));
-        menu.add(new MenuItem("Rectangle"));
-        menu.add(new MenuItem("Rectangle"));
+        menu.add(new MenuItem("Oval"));
+        menu.add(new MenuItem("Point"));
+        menu.add(new MenuItem("Square"));
         
         
         for(MenuItem mi : menu)
         {
-           
+           shape.getItems().add(mi);
         } 
          
         

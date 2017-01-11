@@ -58,6 +58,8 @@ public class FXMLMainWinController implements Initializable {
     private ColorPicker sColor;
     @FXML
     private GridPane grid;
+    @FXML
+    private SplitMenuButton shape;
     
     /**
      * Add a tab on the tab list
@@ -69,9 +71,9 @@ public class FXMLMainWinController implements Initializable {
         newTab.setContent(cvs);
         cvs.setId("canvas"+numeroTab);
         grid.add(cvs, 3, 2);
-        
         newTab.setContent(cvs);
-
+        GraphicsContext gc = cvs.getGraphicsContext2D();
+        
         tabContainer.getTabs().add(newTab);
         ++numeroTab;
     }
@@ -239,5 +241,21 @@ public class FXMLMainWinController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         createBackgroundLayer();
         GraphicsContext gc = canvas.getGraphicsContext2D();
+        List<MenuItem> menu = new ArrayList<MenuItem>();
+        
+        menu.add(new MenuItem("Rectangle"));
+        menu.add(new MenuItem("Circle"));
+        menu.add(new MenuItem("Line"));
+        menu.add(new MenuItem("Rectangle"));
+        menu.add(new MenuItem("Rectangle"));
+        menu.add(new MenuItem("Rectangle"));
+        
+        
+        for(MenuItem mi : menu)
+        {
+           
+        } 
+         
+        
     }
 }

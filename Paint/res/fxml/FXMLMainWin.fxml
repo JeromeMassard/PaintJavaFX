@@ -152,14 +152,14 @@
                 </FlowPane>
                 <ToolBar prefHeight="40.0" prefWidth="200.0" GridPane.rowIndex="1">
                     <items>
-                        <SplitMenuButton mnemonicParsing="false" text="Shape">
+                        <SplitMenuButton mnemonicParsing="false" text="Shape" fx:id="shape">
                             <items>
                                 
                             </items>
                         </SplitMenuButton>
                         <Label text="First Color"/>
                         <ColorPicker prefWidth="50" fx:id="fColor"/>
-                        <Label text="Second Color"/>
+                        <CheckBox text="Second Color" />
                         <ColorPicker prefWidth="50" fx:id="sColor"/>
                         <GridPane>
                             <columnConstraints>

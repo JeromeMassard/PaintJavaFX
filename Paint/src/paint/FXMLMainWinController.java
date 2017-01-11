@@ -1,5 +1,6 @@
 package paint;
 
+import com.sun.javafx.scene.control.skin.ColorPalette;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import paint.elements.components.Component;
 import paint.elements.components.Rectangle;
@@ -50,15 +52,25 @@ public class FXMLMainWinController implements Initializable {
     private TabPane tabContainer;
     @FXML
     private Canvas canvas;
-
+    @FXML
+    private ColorPicker fColor;
+    @FXML
+    private ColorPicker sColor;
+    @FXML
+    private GridPane grid;
+    
     /**
      * Add a tab on the tab list
      */
     public void addTab() {
         Tab newTab = new Tab();
-        Canvas cvs = new Canvas();
+        Canvas cvs = new Canvas(960.0, 650.0);
         newTab.setText("New Draw n°" + numeroTab);
-        newTab.contentProperty().set(cvs);
+        newTab.setContent(cvs);
+        cvs.setId("canvas"+numeroTab);
+        grid.add(cvs, 3, 2);
+        
+        newTab.setContent(cvs);
 
         tabContainer.getTabs().add(newTab);
         ++numeroTab;

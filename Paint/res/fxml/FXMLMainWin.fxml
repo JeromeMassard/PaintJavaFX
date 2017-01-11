@@ -38,13 +38,13 @@
                     <tabs>
                         <Tab text="Untitled Draw 0">
                             <content>
-                                <Canvas fx:id="canvas" height="650.0" onMouseClicked="#onMouseClicked" onMousePressed="#onMousePressed" onMouseReleased="#onMouseReleased" width="960.0" GridPane.columnSpan="3" GridPane.rowIndex="2" />
+                                <Canvas fx:id="canvas" height="650.0" onMousePressed="#onMousePressed" onMouseReleased="#onMouseReleased" width="960.0" GridPane.columnSpan="3" GridPane.rowIndex="2" />
                             </content>
                         </Tab>
                     </tabs>
                 </TabPane>
                 <GridPane GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="0">
-                     <columnConstraints>
+                    <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" />
                     </columnConstraints>
@@ -52,8 +52,8 @@
                         <RowConstraints maxHeight="35" vgrow="SOMETIMES" />
                     </rowConstraints>
                     
-                        <Button onAction="#removeTab" prefHeight="99999" prefWidth="99999" GridPane.columnIndex="0"> - </Button>
-                        <Button onAction="#addTab" prefHeight="99999" prefWidth="99999" GridPane.columnIndex="1"> + </Button>
+                    <Button onAction="#removeTab" prefHeight="99999" prefWidth="99999" GridPane.columnIndex="0"> - </Button>
+                    <Button onAction="#addTab" prefHeight="99999" prefWidth="99999" GridPane.columnIndex="1"> + </Button>
                 </GridPane>
             </children>
         </GridPane>
@@ -124,18 +124,15 @@
                                 </Menu>
                                 <Menu mnemonicParsing="false" text="Effects">
                                     <items>
-                                        <MenuItem mnemonicParsing="false" text="Effet1" />
-                                        <MenuItem mnemonicParsing="false" text="Bruit" />
-                                        <Menu mnemonicParsing="false" text="Flou">
+                                        <Menu mnemonicParsing="false" text="Deformation">
                                             <items>
+                                                <MenuItem mnemonicParsing="false" text="Bruit" />
                                                 <MenuItem mnemonicParsing="false" text="Flou gaussien" />
-                                                <MenuItem mnemonicParsing="false" text="Flou de zone" />
                                             </items>
                                         </Menu>
-                                        <MenuItem mnemonicParsing="false" text="blablablabla" />
                                         <Menu mnemonicParsing="false" text="Coloration">
                                             <items>
-                                                <MenuItem mnemonicParsing="false" text="sepia" />
+                                                <MenuItem mnemonicParsing="false" text="Sepia" />
                                                 <MenuItem mnemonicParsing="false" text="Noir et Blanc" />
                                             </items>
                                         </Menu>
@@ -158,9 +155,9 @@
                             </items>
                         </SplitMenuButton>
                         <Label text="First Color"/>
-                        <ColorPicker prefWidth="50" fx:id="fColor"/>
+                        <ColorPicker fx:id="fColor" prefWidth="50"/>
                         <CheckBox text="Second Color" />
-                        <ColorPicker prefWidth="50" fx:id="sColor"/>
+                        <ColorPicker fx:id="sColor" prefWidth="50"/>
                         <GridPane>
                             <columnConstraints>
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" />
@@ -175,7 +172,7 @@
                                 <Label text=" Opacity:" GridPane.columnIndex="0" />
                                 <Spinner fx:id="opacity" amountToStepBy="1" editable="true" initialValue="100" max="100" maxWidth="75" min="1" GridPane.columnIndex="1" />
                                 <Label text=" Size : " GridPane.columnIndex="2" />
-                                <Spinner fx:id="size" amountToStepBy="0.5" editable="true" initialValue="100" max="100" maxWidth="75" min="0.5" GridPane.columnIndex="3" />
+                                <Spinner fx:id="size" amountToStepBy="1" editable="true" initialValue="8" max="100" maxWidth="75" min="1" GridPane.columnIndex="3" />
                                 <CheckBox mnemonicParsing="false" text="Lisser" GridPane.columnIndex="5" />
                             </children>
                             <rowConstraints>

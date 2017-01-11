@@ -3,6 +3,7 @@ package paint;
 import com.sun.javafx.scene.control.skin.ColorPalette;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -17,7 +18,11 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import paint.elements.components.Circle;
 import paint.elements.components.Component;
+import paint.elements.components.Line;
+import paint.elements.components.Oval;
+import paint.elements.components.Point;
 import paint.elements.components.Rectangle;
 import paint.elements.components.Square;
 import paint.elements.components.Text;
@@ -138,44 +143,13 @@ public class FXMLMainWinController implements Initializable {
         layerZone.setItems(observableList);
     }
 
-    // ===== TEST ===== //
+    // ===== ZONE TEST ===== //
     
     private int firstClickX = -1;
     private int firstClickY = -1;
     private int secondClickX = -1;
     private int secondClickY = -1;
     Random rand = new Random();
-
-    @FXML
-    public void onMouseClicked(MouseEvent e) {
-        /*
-        if (firstClickX == -1)
-            firstClickX = (int) e.getX();
-        else if (secondClickX == -1)
-            secondClickX = (int) e.getX();
-
-        if (firstClickY == -1)
-            firstClickY = (int) e.getY();
-        else if (secondClickY == -1)
-            secondClickY = (int) e.getY();
-
-        if (firstClickX != -1 && firstClickY != -1 && secondClickX != -1 && secondClickY != -1) {
-            if (e.getButton() == MouseButton.PRIMARY) {
-                Component rt = new Rectangle(firstClickX, firstClickY, (secondClickX - firstClickX), (secondClickY - firstClickY));
-                rt.setPrimaryColor(Color.rgb(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256)));
-                rt.draw(canvas.getGraphicsContext2D());
-                
-                Text t = new Text(firstClickX, firstClickY, "ABCD");
-                t.draw(canvas.getGraphicsContext2D());
-            }
-
-            firstClickX = -1;
-            firstClickY = -1;
-            secondClickX = -1;
-            secondClickY = -1;
-        }
-        */
-    }
     
     @FXML
     public void onMousePressed(MouseEvent e) {
@@ -183,7 +157,7 @@ public class FXMLMainWinController implements Initializable {
         firstClickY = (int) e.getY();
     }
     
-        @FXML
+    @FXML
     public void onMouseReleased(MouseEvent e) {
         GraphicsContext g = canvas.getGraphicsContext2D();
         
@@ -209,23 +183,40 @@ public class FXMLMainWinController implements Initializable {
         }
         
         if (e.getButton() == MouseButton.PRIMARY) {
-            Component rt;
+            String test = "sfd";
+            Component rt = null;
         
-            /* rt = new Rectangle(x, y, width, height); */                              /* Dessine un rectangle */
-            /* rt = new Line(firstClickX, firstClickY, secondClickX, secondClickY); */  /* Dessine une ligne    */
-            /* rt = new Oval(x, y, width, height);   */                                 /* Dessine un oval      */
-            
-            /* List<String> values = Arrays.asList("Fromage", "Jérôme", "Thomas", "Des barres", "Radiateur", "Ça marche", "C'est un miracle"); */
-            /* rt = new Text(x, y, values.get(rand.nextInt(values.size()))); */         /* Dessine un texte     */
-            
-            rt = new Square(x, y, (width + height) / 2);
+            switch (test.toLowerCase()) {
+                case "circle":
+                    rt = new Circle(x, y, (width + height) / 2);
+                    break;
+                case "line":
+                    rt = new Line(firstClickX, firstClickY, secondClickX, secondClickY);
+                    break;
+                case "oval":
+                    rt = new Oval(x, y, width, height);
+                    break;
+                case "point":
+                    rt = new Point(x, y, rand.nextBoolean());
+                    break;
+                case "square":
+                    rt = new Square(x, y, (width + height) / 2);
+                    break;
+                case "text":
+                    List<String> values = Arrays.asList("Fromage", "Jérôme", "Thomas", "Des barres", "Radiateur", "Ça marche", "C'est un miracle");
+                    rt = new Text(x, y, values.get(rand.nextInt(values.size())));
+                    break;
+                default:
+                    rt = new Rectangle(x, y, width, height);
+                    break;
+            }
             
             /* Définit la couleur primaire */
-            rt.setPrimaryColor(Color.rgb(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256)));
+            rt.setPrimaryColor(fColor.getValue());
             /* Définit la couleur secondaire (utilisée uniquement si le Mode FILLSTROKE est utilisé) */
-            rt.setSecondaryColor(Color.rgb(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256)));
+            rt.setSecondaryColor(sColor.getValue());
             /* Définit l'épaisseur du composant (le contour si le Mode FILLSTROKE est utilisé) */
-            rt.setThickness(1 + rand.nextInt(16));
+            rt.setThickness(5);
             /* Définit le mode de dessin du composant */
             rt.setMode(Component.Mode.FILLSTROKE);
             
@@ -234,14 +225,16 @@ public class FXMLMainWinController implements Initializable {
         
         //g.setEffect(new GaussianBlur(rand.nextInt(256)));
     }
-        
-    // ===== TEST ===== //
+    
+    // ===== ZONE TEST ===== //
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         createBackgroundLayer();
         GraphicsContext gc = canvas.getGraphicsContext2D();
         List<MenuItem> menu = new ArrayList<MenuItem>();
+        
+        sColor.setValue(Color.rgb(0, 0, 0, 1.0D));
         
         menu.add(new MenuItem("Rectangle"));
         menu.add(new MenuItem("Circle"));
@@ -256,6 +249,5 @@ public class FXMLMainWinController implements Initializable {
            shape.getItems().add(mi);
         } 
          
-        
     }
 }

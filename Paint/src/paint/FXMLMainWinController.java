@@ -134,6 +134,7 @@ public class FXMLMainWinController implements Initializable {
 
     @FXML
     public void onMouseClicked(MouseEvent e) {
+        /*
         if (firstClickX == -1)
             firstClickX = (int) e.getX();
         else if (secondClickX == -1)
@@ -159,8 +160,25 @@ public class FXMLMainWinController implements Initializable {
             secondClickX = -1;
             secondClickY = -1;
         }
+        */
     }
-
+    
+    @FXML
+    public void onMousePressed(MouseEvent e) {
+        firstClickX = (int) e.getX();
+        firstClickY = (int) e.getY();
+    }
+    
+    @FXML
+    public void onMouseReleased(MouseEvent e) {
+        secondClickX = (int) e.getX();
+        secondClickY = (int) e.getY();
+        
+        Component rt = new Rectangle(firstClickX, firstClickY, (secondClickX - firstClickX), (secondClickY - firstClickY));
+        rt.setPrimaryColor(Color.rgb(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256)));
+        rt.draw(canvas.getGraphicsContext2D());
+    }
+        
     // ===== TEST ===== //
     
     @Override

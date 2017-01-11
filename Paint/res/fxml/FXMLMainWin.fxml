@@ -38,7 +38,7 @@
                     <tabs>
                         <Tab text="Untitled Draw 0">
                             <content>
-                                <Canvas fx:id="canvas" height="650.0" onMouseClicked="#onMouseClicked" width="960.0" GridPane.columnSpan="3" GridPane.rowIndex="2" />
+                                <Canvas fx:id="canvas" height="650.0" onMouseClicked="#onMouseClicked" onMousePressed="#onMousePressed" onMouseReleased="#onMouseReleased" width="960.0" GridPane.columnSpan="3" GridPane.rowIndex="2" />
                             </content>
                         </Tab>
                     </tabs>

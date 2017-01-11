@@ -174,7 +174,30 @@ public class FXMLMainWinController implements Initializable {
         secondClickX = (int) e.getX();
         secondClickY = (int) e.getY();
         
-        Component rt = new Rectangle(firstClickX, firstClickY, (secondClickX - firstClickX), (secondClickY - firstClickY));
+        int x = 0;
+        int y = 0;
+        int width = 0;
+        int height = 0;
+        
+        if (firstClickX > secondClickX) {
+            x = secondClickX;
+            width = firstClickX - secondClickX;
+        }
+        else {
+            x = firstClickX;
+            width = secondClickX - firstClickX;
+        }
+        
+        if (firstClickY > secondClickY) {
+            y = secondClickY;
+            height = firstClickY - secondClickY;
+        }
+        else {
+            y = firstClickY;
+            height = secondClickY - firstClickY;
+        }
+        
+        Component rt = new Rectangle(x, y, width, height/*(secondClickX - firstClickX), (secondClickY - firstClickY)*/);
         rt.setPrimaryColor(Color.rgb(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256)));
         rt.draw(canvas.getGraphicsContext2D());
     }

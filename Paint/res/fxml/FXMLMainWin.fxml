@@ -22,7 +22,7 @@
         <RowConstraints minHeight="0.0" percentHeight="5.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <GridPane GridPane.columnIndex="0" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.vgrow="SOMETIMES">
+        <GridPane GridPane.columnIndex="0" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.vgrow="SOMETIMES" fx:id="grid" >
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="94.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="3.0" />
@@ -152,13 +152,15 @@
                 </FlowPane>
                 <ToolBar prefHeight="40.0" prefWidth="200.0" GridPane.rowIndex="1">
                     <items>
-                        <SplitMenuButton mnemonicParsing="false" text="SplitMenuButton">
+                        <SplitMenuButton mnemonicParsing="false" text="Shape">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="Action 1" />
-                                <MenuItem mnemonicParsing="false" text="Action 2" />
+                                
                             </items>
                         </SplitMenuButton>
-                        <ColorPicker />
+                        <Label text="First Color"/>
+                        <ColorPicker prefWidth="50" fx:id="fColor"/>
+                        <Label text="Second Color"/>
+                        <ColorPicker prefWidth="50" fx:id="sColor"/>
                         <GridPane>
                             <columnConstraints>
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" />
@@ -166,7 +168,7 @@
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" />
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" />
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" />
-                                <ColumnConstraints />
+                                
                             </columnConstraints>
 
                             <children>

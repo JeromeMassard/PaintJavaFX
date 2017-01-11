@@ -181,37 +181,56 @@ public class FXMLMainWinController implements Initializable {
         firstClickY = (int) e.getY();
     }
     
-    @FXML
+        @FXML
     public void onMouseReleased(MouseEvent e) {
+        GraphicsContext g = canvas.getGraphicsContext2D();
+        
         secondClickX = (int) e.getX();
         secondClickY = (int) e.getY();
-        
-        int x = 0;
-        int y = 0;
-        int width = 0;
-        int height = 0;
-        
+
+        int x = 0, y = 0, width = 0, height = 0;
+
         if (firstClickX > secondClickX) {
             x = secondClickX;
             width = firstClickX - secondClickX;
-        }
-        else {
+        } else {
             x = firstClickX;
             width = secondClickX - firstClickX;
         }
-        
+
         if (firstClickY > secondClickY) {
             y = secondClickY;
             height = firstClickY - secondClickY;
-        }
-        else {
+        } else {
             y = firstClickY;
             height = secondClickY - firstClickY;
         }
         
-        Component rt = new Rectangle(x, y, width, height/*(secondClickX - firstClickX), (secondClickY - firstClickY)*/);
-        rt.setPrimaryColor(Color.rgb(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256)));
-        rt.draw(canvas.getGraphicsContext2D());
+        if (e.getButton() == MouseButton.PRIMARY) {
+            Component rt;
+        
+            /* rt = new Rectangle(x, y, width, height); */                              /* Dessine un rectangle */
+            /* rt = new Line(firstClickX, firstClickY, secondClickX, secondClickY); */  /* Dessine une ligne    */
+            /* rt = new Oval(x, y, width, height);   */                                 /* Dessine un oval      */
+            
+            /* List<String> values = Arrays.asList("Fromage", "Jérôme", "Thomas", "Des barres", "Radiateur", "Ça marche", "C'est un miracle"); */
+            /* rt = new Text(x, y, values.get(rand.nextInt(values.size()))); */         /* Dessine un texte     */
+            
+            rt = new Square(x, y, (width + height) / 2);
+            
+            /* Définit la couleur primaire */
+            rt.setPrimaryColor(Color.rgb(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256)));
+            /* Définit la couleur secondaire (utilisée uniquement si le Mode FILLSTROKE est utilisé) */
+            rt.setSecondaryColor(Color.rgb(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256)));
+            /* Définit l'épaisseur du composant (le contour si le Mode FILLSTROKE est utilisé) */
+            rt.setThickness(1 + rand.nextInt(16));
+            /* Définit le mode de dessin du composant */
+            rt.setMode(Component.Mode.FILLSTROKE);
+            
+            rt.draw(g);
+        }
+        
+        //g.setEffect(new GaussianBlur(rand.nextInt(256)));
     }
         
     // ===== TEST ===== //

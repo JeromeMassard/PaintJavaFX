@@ -233,7 +233,8 @@ public class FXMLMainWinController implements Initializable {
         createBackgroundLayer();
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
-        sColor.setValue(Color.rgb(0, 0, 0, 1.0D));
+        fColor.setValue(Color.rgb(0, 0, 0, 1.0D));
+        sColor.setValue(Color.rgb(255, 255, 255, 1.0D));
         thickness = 8;
     }
 

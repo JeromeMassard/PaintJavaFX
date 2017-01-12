@@ -1,9 +1,7 @@
 package paint;
 
-import com.sun.javafx.scene.control.skin.ColorPalette;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -18,6 +16,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import paint.elements.components.Brush;
 import paint.elements.components.Circle;
 import paint.elements.components.Component;
 import paint.elements.components.Line;
@@ -38,14 +37,17 @@ public class FXMLMainWinController implements Initializable {
      *
      */
     public static int numeroTab = 1;
+
     /**
      *
      */
     public static int numeroLayer = 0;
+
     /**
      *
      */
     private List<Layer> layerList = new ArrayList<>();
+
     /**
      *
      */
@@ -67,9 +69,10 @@ public class FXMLMainWinController implements Initializable {
     private SplitMenuButton shape;
     @FXML
     private Spinner size;
-    
+
     private int thickness;
-    
+    private Component selectedComponent;
+
     /**
      * Add a tab on the tab list
      */
@@ -78,11 +81,11 @@ public class FXMLMainWinController implements Initializable {
         Canvas cvs = new Canvas(960.0, 650.0);
         newTab.setText("New Draw n°" + numeroTab);
         newTab.setContent(cvs);
-        cvs.setId("canvas"+numeroTab);
+        cvs.setId("canvas" + numeroTab);
         grid.add(cvs, 3, 2);
         newTab.setContent(cvs);
         GraphicsContext gc = cvs.getGraphicsContext2D();
-        
+
         tabContainer.getTabs().add(newTab);
         ++numeroTab;
     }
@@ -137,23 +140,22 @@ public class FXMLMainWinController implements Initializable {
     }
 
     // ===== ZONE TEST ===== //
-    
     private int firstClickX = -1;
     private int firstClickY = -1;
     private int secondClickX = -1;
     private int secondClickY = -1;
     Random rand = new Random();
-    
+
     @FXML
     public void onMousePressed(MouseEvent e) {
         firstClickX = (int) e.getX();
         firstClickY = (int) e.getY();
     }
-    
+
     @FXML
     public void onMouseReleased(MouseEvent e) {
         GraphicsContext g = canvas.getGraphicsContext2D();
-        
+
         secondClickX = (int) e.getX();
         secondClickY = (int) e.getY();
 
@@ -174,74 +176,90 @@ public class FXMLMainWinController implements Initializable {
             y = firstClickY;
             height = secondClickY - firstClickY;
         }
-        
+
         if (e.getButton() == MouseButton.PRIMARY) {
-            String test = "point";
-            Component rt = null;
-        
+            String test = "brush";
+
             switch (test.toLowerCase()) {
                 case "circle":
-                    rt = new Circle(x, y, (width + height) / 2);
+                    selectedComponent = new Circle(x, y, (width + height) / 2);
                     break;
                 case "line":
-                    rt = new Line(firstClickX, firstClickY, secondClickX, secondClickY);
+                    selectedComponent = new Line(firstClickX, firstClickY, secondClickX, secondClickY);
                     break;
                 case "oval":
-                    rt = new Oval(x, y, width, height);
+                    selectedComponent = new Oval(x, y, width, height);
                     break;
                 case "point":
-                    rt = new Point(x, y, rand.nextBoolean());
+                    selectedComponent = new Point(x, y, rand.nextBoolean());
                     break;
                 case "square":
-                    rt = new Square(x, y, (width + height) / 2);
+                    selectedComponent = new Square(x, y, (width + height) / 2);
                     break;
                 case "text":
-                    rt = new Text(x, y, "...");
+                    selectedComponent = new Text(x, y, "...");
                     break;
+                case "brush":
+                    selectedComponent = new Brush(x, y);
+                    return;
                 default:
-                    rt = new Rectangle(x, y, width, height);
+                    selectedComponent = new Rectangle(x, y, width, height);
                     break;
             }
-            
+
             /* Définit la couleur primaire */
-            rt.setPrimaryColor(fColor.getValue());
+            selectedComponent.setPrimaryColor(fColor.getValue());
             /* Définit la couleur secondaire (utilisée uniquement si le Mode FILLSTROKE est utilisé) */
-            rt.setSecondaryColor(sColor.getValue());
+            selectedComponent.setSecondaryColor(sColor.getValue());
             /* Définit l'épaisseur du composant (le contour si le Mode FILLSTROKE est utilisé) */
-            rt.setThickness(thickness);
+            selectedComponent.setThickness(thickness);
             /* Définit le mode de dessin du composant */
-            
-            if (sColor.isDisable())
-                rt.setMode(Component.Mode.FILL);
-            else
-                rt.setMode(Component.Mode.FILLSTROKE);
-            
-            rt.draw(g);
+
+            if (sColor.isDisable()) {
+                selectedComponent.setMode(Component.Mode.FILL);
+            } else {
+                selectedComponent.setMode(Component.Mode.FILLSTROKE);
+            }
+
+            selectedComponent.draw(g);
         }
-        
+
         //g.setEffect(new GaussianBlur(rand.nextInt(256)));
-        }
-    
+    }
+
     // ===== ZONE TEST ===== //
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         createBackgroundLayer();
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        List<MenuItem> menu = new ArrayList<MenuItem>();
-        
+
         sColor.setValue(Color.rgb(0, 0, 0, 1.0D));
         thickness = 8;
     }
-    
-    public void setEnableSecondaryColor(){
-        if(!sColor.disableProperty().getValue()) sColor.disableProperty().setValue(true);
-        else sColor.disableProperty().setValue(false);
+
+    public void setEnableSecondaryColor() {
+        if (!sColor.disableProperty().getValue()) {
+            sColor.disableProperty().setValue(true);
+        } else {
+            sColor.disableProperty().setValue(false);
+        }
     }
-    
+
     @FXML
     public void onSizeChanged() {
         SpinnerValueFactory<Double> valueFactory = size.getValueFactory();
         thickness = valueFactory.getValue().intValue();
+    }
+    
+    @FXML
+    public void onMouseDragged(MouseEvent e) {
+        if (selectedComponent instanceof Brush) {
+            selectedComponent.setPrimaryColor(fColor.getValue());
+            selectedComponent.setSecondaryColor(sColor.getValue());
+            selectedComponent.setThickness(thickness);
+            
+            selectedComponent.setPosition((int)e.getX(), (int)e.getY());
+            selectedComponent.draw(canvas.getGraphicsContext2D());
+        }
     }
 }

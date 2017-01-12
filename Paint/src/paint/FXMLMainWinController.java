@@ -108,17 +108,6 @@ public class FXMLMainWinController implements Initializable {
         layerZone.setItems(observableList);
     }
 
-    public void addLayer(String name) {
-        Layer newLayer = new Layer();
-        Layer.setRootWidth(layerZone.getWidth());
-
-        layerList.add(newLayer);
-        newLayer.setName(name);
-
-        observableList.setAll(layerList);
-        layerZone.setItems(observableList);
-    }
-
     private void createBackgroundLayer() {
         Layer background = new Layer();
         background.setLocked(true);

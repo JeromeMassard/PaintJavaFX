@@ -256,7 +256,5 @@ public class FXMLMainWinController implements Initializable {
     public void onSizeChanged() {
         SpinnerValueFactory<Double> valueFactory = size.getValueFactory();
         thickness = valueFactory.getValue().intValue();
-        
-        System.out.println(thickness);
     }
 }

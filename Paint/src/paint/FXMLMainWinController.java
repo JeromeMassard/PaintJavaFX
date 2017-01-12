@@ -225,7 +225,7 @@ public class FXMLMainWinController implements Initializable {
         }
         
         //g.setEffect(new GaussianBlur(rand.nextInt(256)));
-    }
+        }
     
     // ===== ZONE TEST ===== //
     
@@ -253,7 +253,7 @@ public class FXMLMainWinController implements Initializable {
     }
     
     
-    public void setEnabledSecondaryColor(){
+    public void setEnableSecondaryColor(){
         if(sColor.disableProperty().getValue() != Boolean.TRUE)
         {
            sColor.disableProperty().setValue(Boolean.TRUE);

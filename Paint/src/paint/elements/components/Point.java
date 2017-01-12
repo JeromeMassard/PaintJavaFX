@@ -17,6 +17,7 @@ public class Point extends Component {
 
     @Override
     public void draw(GraphicsContext g) {
+        g.setLineWidth(thickness);
         g.setFill(primaryColor);
         
         if (circle)

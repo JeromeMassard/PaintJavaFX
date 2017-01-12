@@ -65,7 +65,10 @@ public class FXMLMainWinController implements Initializable {
     private GridPane grid;
     @FXML
     private SplitMenuButton shape;
-
+    @FXML
+    private Spinner size;
+    
+    private int thickness;
     
     /**
      * Add a tab on the tab list
@@ -100,17 +103,6 @@ public class FXMLMainWinController implements Initializable {
 
         layerList.add(newLayer);
         newLayer.setName("Layer n°" + layerList.indexOf(newLayer));
-
-        observableList.setAll(layerList);
-        layerZone.setItems(observableList);
-    }
-
-    public void addLayer(String name) {
-        Layer newLayer = new Layer();
-        Layer.setRootWidth(layerZone.getWidth());
-
-        layerList.add(newLayer);
-        newLayer.setName(name);
 
         observableList.setAll(layerList);
         layerZone.setItems(observableList);
@@ -184,7 +176,7 @@ public class FXMLMainWinController implements Initializable {
         }
         
         if (e.getButton() == MouseButton.PRIMARY) {
-            String test = "sfd";
+            String test = "point";
             Component rt = null;
         
             switch (test.toLowerCase()) {
@@ -204,8 +196,7 @@ public class FXMLMainWinController implements Initializable {
                     rt = new Square(x, y, (width + height) / 2);
                     break;
                 case "text":
-                    List<String> values = Arrays.asList("Fromage", "Jérôme", "Thomas", "Des barres", "Radiateur", "Ça marche", "C'est un miracle");
-                    rt = new Text(x, y, values.get(rand.nextInt(values.size())));
+                    rt = new Text(x, y, "...");
                     break;
                 default:
                     rt = new Rectangle(x, y, width, height);
@@ -217,9 +208,13 @@ public class FXMLMainWinController implements Initializable {
             /* Définit la couleur secondaire (utilisée uniquement si le Mode FILLSTROKE est utilisé) */
             rt.setSecondaryColor(sColor.getValue());
             /* Définit l'épaisseur du composant (le contour si le Mode FILLSTROKE est utilisé) */
-            rt.setThickness(5);
+            rt.setThickness(thickness);
             /* Définit le mode de dessin du composant */
-            rt.setMode(Component.Mode.FILLSTROKE);
+            
+            if (sColor.isDisable())
+                rt.setMode(Component.Mode.FILL);
+            else
+                rt.setMode(Component.Mode.FILLSTROKE);
             
             rt.draw(g);
         }
@@ -236,31 +231,17 @@ public class FXMLMainWinController implements Initializable {
         List<MenuItem> menu = new ArrayList<MenuItem>();
         
         sColor.setValue(Color.rgb(0, 0, 0, 1.0D));
-        
-        menu.add(new MenuItem("Rectangle"));
-        menu.add(new MenuItem("Circle"));
-        menu.add(new MenuItem("Line"));
-        menu.add(new MenuItem("Oval"));
-        menu.add(new MenuItem("Point"));
-        menu.add(new MenuItem("Square"));
-        
-        
-        for(MenuItem mi : menu)
-        {
-           shape.getItems().add(mi);
-        } 
-         
+        thickness = 8;
     }
-    
     
     public void setEnableSecondaryColor(){
-        if(sColor.disableProperty().getValue() != Boolean.TRUE)
-        {
-           sColor.disableProperty().setValue(Boolean.TRUE);
-        } 
-        else {
-            sColor.disableProperty().setValue(Boolean.FALSE);
-        }
+        if(!sColor.disableProperty().getValue()) sColor.disableProperty().setValue(true);
+        else sColor.disableProperty().setValue(false);
     }
     
+    @FXML
+    public void onSizeChanged() {
+        SpinnerValueFactory<Double> valueFactory = size.getValueFactory();
+        thickness = valueFactory.getValue().intValue();
+    }
 }

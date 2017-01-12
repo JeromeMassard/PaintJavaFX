@@ -176,7 +176,7 @@ public class FXMLMainWinController implements Initializable {
         }
         
         if (e.getButton() == MouseButton.PRIMARY) {
-            String test = "sfd";
+            String test = "point";
             Component rt = null;
         
             switch (test.toLowerCase()) {
@@ -196,8 +196,7 @@ public class FXMLMainWinController implements Initializable {
                     rt = new Square(x, y, (width + height) / 2);
                     break;
                 case "text":
-                    List<String> values = Arrays.asList("Fromage", "Jérôme", "Thomas", "Des barres", "Radiateur", "Ça marche", "C'est un miracle");
-                    rt = new Text(x, y, values.get(rand.nextInt(values.size())));
+                    rt = new Text(x, y, "...");
                     break;
                 default:
                     rt = new Rectangle(x, y, width, height);
@@ -233,7 +232,6 @@ public class FXMLMainWinController implements Initializable {
         
         sColor.setValue(Color.rgb(0, 0, 0, 1.0D));
         thickness = 8;
-         
     }
     
     public void setEnableSecondaryColor(){

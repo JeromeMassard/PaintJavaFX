@@ -22,7 +22,7 @@
         <RowConstraints minHeight="0.0" percentHeight="5.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <GridPane GridPane.columnIndex="0" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.vgrow="SOMETIMES" fx:id="grid" >
+        <GridPane fx:id="grid" GridPane.columnIndex="0" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.vgrow="SOMETIMES">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="94.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="3.0" />
@@ -149,15 +149,15 @@
                 </FlowPane>
                 <ToolBar prefHeight="40.0" prefWidth="200.0" GridPane.rowIndex="1">
                     <items>
-                        <SplitMenuButton mnemonicParsing="false" text="Shape" fx:id="shape">
+                        <SplitMenuButton fx:id="shape" mnemonicParsing="false" text="Shape">
                             <items>
                                 
                             </items>
                         </SplitMenuButton>
-                        <Label text="First Color"/>
-                        <ColorPicker fx:id="fColor" prefWidth="50"/>
-                        <CheckBox text="Second Color" onAction="#setEnableSecondaryColor" fx:id="checkSC"/>
-                        <ColorPicker fx:id="sColor" prefWidth="50" disable="true"/>
+                        <Label text="First Color" />
+                        <ColorPicker fx:id="fColor" prefWidth="50" />
+                        <CheckBox fx:id="checkSC" onAction="#setEnableSecondaryColor" text="Second Color" />
+                        <ColorPicker fx:id="sColor" disable="true" prefWidth="50" />
                         <GridPane>
                             <columnConstraints>
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" />
@@ -165,14 +165,15 @@
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" />
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" />
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" />
+                        <ColumnConstraints />
                                 
                             </columnConstraints>
 
                             <children>
                                 <Label text=" Opacity:" GridPane.columnIndex="0" />
-                                <Spinner fx:id="opacity" amountToStepBy="1" editable="true" initialValue="100" max="100" maxWidth="75" min="1" GridPane.columnIndex="1" />
+                                <Spinner fx:id="opacity" amountToStepBy="1" initialValue="100" max="100" maxWidth="75" min="1" GridPane.columnIndex="1" />
                                 <Label text=" Size : " GridPane.columnIndex="2" />
-                                <Spinner fx:id="size" amountToStepBy="1" editable="true" initialValue="8" max="100" maxWidth="75" min="1" GridPane.columnIndex="3" />
+                                <Spinner fx:id="size" amountToStepBy="1" initialValue="8" max="100" maxWidth="75" min="1" onMouseClicked="#onSizeChanged" GridPane.columnIndex="3" />
                                 <CheckBox mnemonicParsing="false" text="Lisser" GridPane.columnIndex="5" />
                             </children>
                             <rowConstraints>

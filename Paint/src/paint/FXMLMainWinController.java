@@ -65,7 +65,10 @@ public class FXMLMainWinController implements Initializable {
     private GridPane grid;
     @FXML
     private SplitMenuButton shape;
-
+    @FXML
+    private Spinner size;
+    
+    private int thickness;
     
     /**
      * Add a tab on the tab list
@@ -217,9 +220,13 @@ public class FXMLMainWinController implements Initializable {
             /* Définit la couleur secondaire (utilisée uniquement si le Mode FILLSTROKE est utilisé) */
             rt.setSecondaryColor(sColor.getValue());
             /* Définit l'épaisseur du composant (le contour si le Mode FILLSTROKE est utilisé) */
-            rt.setThickness(5);
+            rt.setThickness(thickness);
             /* Définit le mode de dessin du composant */
-            rt.setMode(Component.Mode.FILLSTROKE);
+            
+            if (sColor.isDisable())
+                rt.setMode(Component.Mode.FILL);
+            else
+                rt.setMode(Component.Mode.FILLSTROKE);
             
             rt.draw(g);
         }
@@ -236,31 +243,20 @@ public class FXMLMainWinController implements Initializable {
         List<MenuItem> menu = new ArrayList<MenuItem>();
         
         sColor.setValue(Color.rgb(0, 0, 0, 1.0D));
-        
-        menu.add(new MenuItem("Rectangle"));
-        menu.add(new MenuItem("Circle"));
-        menu.add(new MenuItem("Line"));
-        menu.add(new MenuItem("Oval"));
-        menu.add(new MenuItem("Point"));
-        menu.add(new MenuItem("Square"));
-        
-        
-        for(MenuItem mi : menu)
-        {
-           shape.getItems().add(mi);
-        } 
+        thickness = 8;
          
     }
     
-    
-    public void setEnabledSecondaryColor(){
-        if(sColor.disableProperty().getValue() != Boolean.TRUE)
-        {
-           sColor.disableProperty().setValue(Boolean.TRUE);
-        } 
-        else {
-            sColor.disableProperty().setValue(Boolean.FALSE);
-        }
+    public void setEnableSecondaryColor(){
+        if(!sColor.disableProperty().getValue()) sColor.disableProperty().setValue(true);
+        else sColor.disableProperty().setValue(false);
     }
     
+    @FXML
+    public void onSizeChanged() {
+        SpinnerValueFactory<Double> valueFactory = size.getValueFactory();
+        thickness = valueFactory.getValue().intValue();
+        
+        System.out.println(thickness);
+    }
 }

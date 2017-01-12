@@ -156,8 +156,8 @@
                         </SplitMenuButton>
                         <Label text="First Color"/>
                         <ColorPicker fx:id="fColor" prefWidth="50"/>
-                        <CheckBox text="Second Color" />
-                        <ColorPicker fx:id="sColor" prefWidth="50"/>
+                        <CheckBox text="Second Color" onAction="#setEnableSecondaryColor" fx:id="checkSC"/>
+                        <ColorPicker fx:id="sColor" prefWidth="50" disable="true"/>
                         <GridPane>
                             <columnConstraints>
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" />

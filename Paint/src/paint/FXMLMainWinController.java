@@ -65,6 +65,7 @@ public class FXMLMainWinController implements Initializable {
     private GridPane grid;
     @FXML
     private SplitMenuButton shape;
+
     
     /**
      * Add a tab on the tab list
@@ -250,4 +251,16 @@ public class FXMLMainWinController implements Initializable {
         } 
          
     }
+    
+    
+    public void setEnabledSecondaryColor(){
+        if(sColor.disableProperty().getValue() != Boolean.TRUE)
+        {
+           sColor.disableProperty().setValue(Boolean.TRUE);
+        } 
+        else {
+            sColor.disableProperty().setValue(Boolean.FALSE);
+        }
+    }
+    
 }

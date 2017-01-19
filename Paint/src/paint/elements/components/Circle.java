@@ -3,7 +3,7 @@ package paint.elements.components;
 import javafx.scene.canvas.GraphicsContext;
 
 /**
- *
+ * Represens a Circle
  * @author bilombardy
  */
 public class Circle extends Component {

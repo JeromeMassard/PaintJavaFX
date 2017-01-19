@@ -2,13 +2,19 @@ package paint.elements.components;
 
 import javafx.scene.canvas.GraphicsContext;
 
+/**
+ * Represents a Line on the canvas
+ * posX posY represents the first coords
+ * posX2 posY2 represents the second coords
+ * @author biombardy
+ */
 public class Line extends Component {
     /** The x position of the second point */
     protected int x2;
     /** The y position of the second point */
     protected int y2;
     
-    public Line(int posX, int posY, int posX2,int posY2) {
+    public Line(int posX, int posY, int posX2, int posY2) {
         super(posX, posY);
         this.x2 = posX2;
         this.y2 = posY2;

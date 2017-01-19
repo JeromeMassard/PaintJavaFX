@@ -3,7 +3,7 @@ package paint.elements.components;
 import javafx.scene.canvas.GraphicsContext;
 
 /**
- *
+ * Reprensents an Oval on the canvas
  * @author bilombardy
  */
 public class Oval extends Component {

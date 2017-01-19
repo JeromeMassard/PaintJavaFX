@@ -3,7 +3,6 @@ package paint;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,26 +31,11 @@ import paint.elements.components.Text;
  * @author jemassard
  */
 public class FXMLMainWinController implements Initializable {
-
-    /**
-     *
-     */
     public static int numeroTab = 1;
-
-    /**
-     *
-     */
     public static int numeroLayer = 0;
 
-    /**
-     *
-     */
     private List<Layer> layerList = new ArrayList<>();
-
-    /**
-     *
-     */
-    ObservableList observableList = FXCollections.observableArrayList();
+    private ObservableList observableList = FXCollections.observableArrayList();
 
     @FXML
     private ListView layerZone;
@@ -73,6 +57,16 @@ public class FXMLMainWinController implements Initializable {
     private int thickness;
     private Component selectedComponent;
     private String selectedMode;
+
+    /* First X coord of the mouse */
+    private int firstClickX = -1;
+    /* First Y coord of the mouse */
+    private int firstClickY = -1;
+    /* Second X coord of the mouse */
+    private int secondClickX = -1;
+    /* Second Y coord of the mouse */
+    private int secondClickY = -1;
+    
     /**
      * Add a tab on the tab list
      */
@@ -111,6 +105,9 @@ public class FXMLMainWinController implements Initializable {
         layerZone.setItems(observableList);
     }
 
+    /**
+     * Create background layer, cannot be deleted
+     */
     private void createBackgroundLayer() {
         Layer background = new Layer();
         background.setLocked(true);
@@ -124,14 +121,14 @@ public class FXMLMainWinController implements Initializable {
     }
 
     /**
-     *
+     * Merge a layer with the lower layer
      */
     public void mergeLayer() {
 
     }
 
     /**
-     *
+     * Delete the selected layer
      */
     public void deleteLayer() {
         layerList.remove(layerZone.getSelectionModel().getSelectedItem());
@@ -139,19 +136,20 @@ public class FXMLMainWinController implements Initializable {
         layerZone.setItems(observableList);
     }
 
-    // ===== ZONE TEST ===== //
-    private int firstClickX = -1;
-    private int firstClickY = -1;
-    private int secondClickX = -1;
-    private int secondClickY = -1;
-    Random rand = new Random();
-
+    /**
+     * Event called when mouse is pressed
+     * @param e 
+     */
     @FXML
     public void onMousePressed(MouseEvent e) {
         firstClickX = (int) e.getX();
         firstClickY = (int) e.getY();
     }
 
+    /**
+     * Event called when mouse is released
+     * @param e 
+     */
     @FXML
     public void onMouseReleased(MouseEvent e) {
         GraphicsContext g = canvas.getGraphicsContext2D();
@@ -159,7 +157,7 @@ public class FXMLMainWinController implements Initializable {
         secondClickX = (int) e.getX();
         secondClickY = (int) e.getY();
 
-        int x = 0, y = 0, width = 0, height = 0;
+        int x, y, width, height;
 
         if (firstClickX > secondClickX) {
             x = secondClickX;
@@ -189,7 +187,7 @@ public class FXMLMainWinController implements Initializable {
                     selectedComponent = new Oval(x, y, width, height);
                     break;
                 case "point":
-                    selectedComponent = new Point(x, y, rand.nextBoolean());
+                    selectedComponent = new Point(x, y);
                     break;
                 case "square":
                     selectedComponent = new Square(x, y, (width + height) / 2);
@@ -205,14 +203,14 @@ public class FXMLMainWinController implements Initializable {
                     break;
             }
 
-            /* Définit la couleur primaire */
+            /* Define primary color for the component */
             selectedComponent.setPrimaryColor(fColor.getValue());
-            /* Définit la couleur secondaire (utilisée uniquement si le Mode FILLSTROKE est utilisé) */
+            /* Define secondary color for the component (only used if Mode is FILLSTROKE) */
             selectedComponent.setSecondaryColor(sColor.getValue());
-            /* Définit l'épaisseur du composant (le contour si le Mode FILLSTROKE est utilisé) */
+            /* Define thickness of the component (only used if Mode is FILLSTROKE) */
             selectedComponent.setThickness(thickness);
-            /* Définit le mode de dessin du composant */
 
+            /* Define drawing mode for component */
             if (sColor.isDisable()) {
                 selectedComponent.setMode(Component.Mode.FILL);
             } else {
@@ -225,7 +223,6 @@ public class FXMLMainWinController implements Initializable {
         //g.setEffect(new GaussianBlur(rand.nextInt(256)));
     }
 
-    // ===== ZONE TEST ===== //
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         createBackgroundLayer();
@@ -233,6 +230,7 @@ public class FXMLMainWinController implements Initializable {
 
         fColor.setValue(Color.rgb(0, 0, 0, 1.0D));
         sColor.setValue(Color.rgb(255, 255, 255, 1.0D));
+        shape.setValue("Brush");
         thickness = 8;
     }
 
@@ -244,12 +242,19 @@ public class FXMLMainWinController implements Initializable {
         }
     }
 
+    /**
+     * Event called when size spinner value is modified
+     */
     @FXML
     public void onSizeChanged() {
-        SpinnerValueFactory<Double> valueFactory = size.getValueFactory();
-        thickness = valueFactory.getValue().intValue();
+        SpinnerValueFactory<Integer> valueFactory = size.getValueFactory();
+        thickness = valueFactory.getValue();
     }
     
+    /**
+     * Event called when mouse is dragged over the canvas
+     * @param e 
+     */
     @FXML
     public void onMouseDragged(MouseEvent e) {
         if (selectedComponent instanceof Brush) {
@@ -262,6 +267,9 @@ public class FXMLMainWinController implements Initializable {
         }
     }
     
+    /**
+     * 
+     */
     public void onSelectedMode()
     {
         selectedMode = shape.getValue().toString();

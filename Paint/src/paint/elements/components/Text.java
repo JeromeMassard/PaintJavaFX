@@ -3,7 +3,7 @@ package paint.elements.components;
 import javafx.scene.canvas.GraphicsContext;
 
 /**
- *
+ * Represents a Text on a canvas
  * @author bilombardy
  */
 public class Text extends Component {

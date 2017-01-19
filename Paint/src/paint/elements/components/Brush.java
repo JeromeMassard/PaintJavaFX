@@ -5,7 +5,8 @@ import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
 
 /**
- *
+ * Represents a Brush
+ * Composed of multiple points that defines the layout
  * @author bilombardy
  */
 public class Brush extends Component {

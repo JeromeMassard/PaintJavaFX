@@ -3,7 +3,8 @@ package paint.elements.components;
 import javafx.scene.canvas.GraphicsContext;
 
 /**
- *
+ * Represents a Rectangle 
+ * Can draw a filled rectangle, a stroked rectangle and rectangle with outline (fillestroke)
  * @author bilombardy
  */
 public class Rectangle extends Component {

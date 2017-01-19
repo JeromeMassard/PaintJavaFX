@@ -1,20 +1,30 @@
 package paint;
 
+import java.awt.image.RenderedImage;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javax.imageio.ImageIO;
 import paint.elements.components.Brush;
 import paint.elements.components.Circle;
 import paint.elements.components.Component;
@@ -53,6 +63,8 @@ public class FXMLMainWinController implements Initializable {
     private ChoiceBox shape;
     @FXML
     private Spinner size;
+    @FXML
+    private MenuItem saveBtn;
 
     private int thickness;
     private Component selectedComponent;
@@ -232,6 +244,35 @@ public class FXMLMainWinController implements Initializable {
         sColor.setValue(Color.rgb(255, 255, 255, 1.0D));
         shape.setValue("Brush");
         thickness = 8;
+        
+        
+        saveBtn.setOnAction(new EventHandler<ActionEvent>() {
+ 
+            @Override
+            public void handle(ActionEvent t) {
+                FileChooser fileChooser = new FileChooser();
+                 
+                //Set extension filter
+                FileChooser.ExtensionFilter extFilter = 
+                        new FileChooser.ExtensionFilter("png files (*.png)", "*.png");
+                fileChooser.getExtensionFilters().add(extFilter);
+               
+                //Show save file dialog
+                File file = fileChooser.showSaveDialog(new Stage());
+                 
+                if(file != null){
+                    try {
+                        WritableImage writableImage = new WritableImage(1200, 800);
+                        canvas.snapshot(null, writableImage);
+                        RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
+                        ImageIO.write(renderedImage, "png", file);
+                    } catch (IOException ex) {
+                        System.out.println(ex);
+                    }
+                }
+            }
+             
+        });
     }
 
     public void setEnableSecondaryColor() {
@@ -270,6 +311,7 @@ public class FXMLMainWinController implements Initializable {
     /**
      * 
      */
+    @FXML
     public void onSelectedMode()
     {
         selectedMode = shape.getValue().toString();

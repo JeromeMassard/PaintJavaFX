@@ -66,13 +66,13 @@ public class FXMLMainWinController implements Initializable {
     @FXML
     private GridPane grid;
     @FXML
-    private SplitMenuButton shape;
+    private ChoiceBox shape;
     @FXML
     private Spinner size;
 
     private int thickness;
     private Component selectedComponent;
-
+    private String selectedMode;
     /**
      * Add a tab on the tab list
      */
@@ -178,9 +178,7 @@ public class FXMLMainWinController implements Initializable {
         }
 
         if (e.getButton() == MouseButton.PRIMARY) {
-            String test = "brush";
-
-            switch (test.toLowerCase()) {
+            switch (selectedMode.toLowerCase()) {
                 case "circle":
                     selectedComponent = new Circle(x, y, (width + height) / 2);
                     break;
@@ -262,5 +260,10 @@ public class FXMLMainWinController implements Initializable {
             selectedComponent.setPosition((int)e.getX(), (int)e.getY());
             selectedComponent.draw(canvas.getGraphicsContext2D());
         }
+    }
+    
+    public void onSelectedMode()
+    {
+        selectedMode = shape.getValue().toString();
     }
 }

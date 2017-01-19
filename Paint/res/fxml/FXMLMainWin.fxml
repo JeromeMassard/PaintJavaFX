@@ -114,7 +114,7 @@
                             <menus>
                                 <Menu mnemonicParsing="false" text="File">
                                     <items>
-                                        <MenuItem mnemonicParsing="false" onAction="#onSave" text="Save" />
+                                        <MenuItem mnemonicParsing="false"  text="Save" />
                                     </items>
                                 </Menu>
                                 <Menu mnemonicParsing="false" text="Edit">
@@ -149,11 +149,16 @@
                 </FlowPane>
                 <ToolBar prefHeight="40.0" prefWidth="200.0" GridPane.rowIndex="1">
                     <items>
-                        <SplitMenuButton fx:id="shape" mnemonicParsing="false" text="Shape">
-                            <items>
-                                
-                            </items>
-                        </SplitMenuButton>
+                        <ChoiceBox fx:id="shape" value="Shape" onAction="#onSelectedMode" >
+                                <String fx:value="Brush"/>
+                                <String fx:value="Rectangle"/>
+                                <String fx:value="Square"/>
+                                <String fx:value="Circle"/>
+                                <String fx:value="Oval"/>
+                                <String fx:value="Line"/>
+                                <String fx:value="Point"/>
+                                <String fx:value="Text"/>
+                        </ChoiceBox>
                         <Label text="First Color" />
                         <ColorPicker fx:id="fColor" prefWidth="50" />
                         <CheckBox fx:id="checkSC" onAction="#setEnableSecondaryColor" text="Second Color" />

@@ -1,5 +1,6 @@
 package paint;
 
+import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
@@ -41,6 +42,9 @@ import paint.elements.components.Text;
  * @author jemassard
  */
 public class FXMLMainWinController implements Initializable {
+    private static final int CANVAS_WIDTH = 960;
+    private static final int CANVAS_HEIGHT = 650;
+    
     public static int numeroTab = 1;
     public static int numeroLayer = 0;
 
@@ -87,7 +91,7 @@ public class FXMLMainWinController implements Initializable {
      */
     public void addTab() {
         Tab newTab = new Tab();
-        Canvas cvs = new Canvas(960.0, 650.0);
+        Canvas cvs = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
         newTab.setText("New Draw n°" + numeroTab);
         newTab.setContent(cvs);
         cvs.setId("canvas" + numeroTab);
@@ -261,7 +265,9 @@ public class FXMLMainWinController implements Initializable {
                  
                 if (file != null) {
                     try {
-                        WritableImage writableImage = new WritableImage(1200, 800);
+                        BufferedImage buffer = new BufferedImage(CANVAS_WIDTH, CANVAS_HEIGHT, BufferedImage.TYPE_4BYTE_ABGR);
+                        WritableImage writableImage = SwingFXUtils.toFXImage(buffer, null);
+                        
                         canvas.snapshot(null, writableImage);
                         RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
                         ImageIO.write(renderedImage, "png", file);

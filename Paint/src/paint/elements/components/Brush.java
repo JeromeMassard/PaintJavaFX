@@ -23,12 +23,15 @@ public class Brush extends Component {
         gc.setFill(primaryColor);
         
         Point pt = new Point(x, y, true);
-        pt.setPrimaryColor(primaryColor);
+        pt.setOpacity(opacity);
         pt.setThickness(thickness);
-        points.add(pt);
+        pt.setPrimaryColor(primaryColor);
+        
+        pt.draw(gc);
+        /*points.add(pt);
         
         points.forEach((p) -> {
             p.draw(gc);
-        });
+        });*/
     }
 }

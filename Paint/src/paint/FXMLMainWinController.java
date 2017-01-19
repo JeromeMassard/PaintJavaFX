@@ -62,10 +62,13 @@ public class FXMLMainWinController implements Initializable {
     @FXML
     private ChoiceBox shape;
     @FXML
+    private Spinner opac;
+    @FXML
     private Spinner size;
     @FXML
     private MenuItem saveBtn;
 
+    private int opacity;
     private int thickness;
     private Component selectedComponent;
     private String selectedMode;
@@ -215,12 +218,14 @@ public class FXMLMainWinController implements Initializable {
                     break;
             }
 
+            /* */
+            selectedComponent.setOpacity(opacity);
+            /* Define thickness of the component (only used if Mode is FILLSTROKE) */
+            selectedComponent.setThickness(thickness);
             /* Define primary color for the component */
             selectedComponent.setPrimaryColor(fColor.getValue());
             /* Define secondary color for the component (only used if Mode is FILLSTROKE) */
             selectedComponent.setSecondaryColor(sColor.getValue());
-            /* Define thickness of the component (only used if Mode is FILLSTROKE) */
-            selectedComponent.setThickness(thickness);
 
             /* Define drawing mode for component */
             if (sColor.isDisable()) {
@@ -243,24 +248,18 @@ public class FXMLMainWinController implements Initializable {
         fColor.setValue(Color.rgb(0, 0, 0, 1.0D));
         sColor.setValue(Color.rgb(255, 255, 255, 1.0D));
         shape.setValue("Brush");
+        opacity = 100;
         thickness = 8;
         
-        
         saveBtn.setOnAction(new EventHandler<ActionEvent>() {
- 
             @Override
             public void handle(ActionEvent t) {
                 FileChooser fileChooser = new FileChooser();
-                 
-                //Set extension filter
-                FileChooser.ExtensionFilter extFilter = 
-                        new FileChooser.ExtensionFilter("png files (*.png)", "*.png");
+                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Fichier PNG (*.png)", "*.png");
                 fileChooser.getExtensionFilters().add(extFilter);
-               
-                //Show save file dialog
                 File file = fileChooser.showSaveDialog(new Stage());
                  
-                if(file != null){
+                if (file != null) {
                     try {
                         WritableImage writableImage = new WritableImage(1200, 800);
                         canvas.snapshot(null, writableImage);
@@ -271,7 +270,6 @@ public class FXMLMainWinController implements Initializable {
                     }
                 }
             }
-             
         });
     }
 
@@ -283,6 +281,12 @@ public class FXMLMainWinController implements Initializable {
         }
     }
 
+    @FXML
+    public void onOpacityChanged() {
+        SpinnerValueFactory<Integer> valueFactory = opac.getValueFactory();
+        opacity = valueFactory.getValue();
+    }
+    
     /**
      * Event called when size spinner value is modified
      */
@@ -299,9 +303,10 @@ public class FXMLMainWinController implements Initializable {
     @FXML
     public void onMouseDragged(MouseEvent e) {
         if (selectedComponent instanceof Brush) {
+            selectedComponent.setOpacity(opacity);
+            selectedComponent.setThickness(thickness);
             selectedComponent.setPrimaryColor(fColor.getValue());
             selectedComponent.setSecondaryColor(sColor.getValue());
-            selectedComponent.setThickness(thickness);
             
             selectedComponent.setPosition((int)e.getX(), (int)e.getY());
             selectedComponent.draw(canvas.getGraphicsContext2D());

@@ -21,6 +21,8 @@ public class Component extends Element {
     protected int x;
     /** The y position of the component */
     protected int y;
+    /** The opacity of the component */
+    protected int opacity;
     /** The thickness position of the component */
     protected int thickness;
     /** The primary color position of the component */
@@ -33,6 +35,7 @@ public class Component extends Element {
     public Component(int posX, int posY)
     {
         this.setPosition(posX, posY);
+        this.setOpacity(100);
         this.setThickness(1);
         this.setPrimaryColor(Color.BLACK);
         this.setSecondaryColor(Color.BLACK);
@@ -57,6 +60,19 @@ public class Component extends Element {
     }
     
     /**
+     * Sets the opacity of the component
+     * @param opacity Percent of opacity
+     */
+    public final void setOpacity(int opacity) {
+        if (opacity < 0)
+            opacity = 0;
+        else if (opacity > 100)
+            opacity = 100;
+        
+        this.opacity = opacity;
+    }
+    
+    /**
      * Sets the thickness of the component
      * @param thickness Width of borders
      */
@@ -74,7 +90,7 @@ public class Component extends Element {
      */
     public final void setPrimaryColor(Color primaryColor)
     {
-        this.primaryColor = primaryColor;
+        this.primaryColor = Color.rgb((int) (primaryColor.getRed() * 255), (int) (primaryColor.getGreen() * 255), (int) (primaryColor.getBlue() * 255), opacity / 100.0D);
     }
     
     /**
@@ -83,7 +99,7 @@ public class Component extends Element {
      */
     public final void setSecondaryColor(Color secondaryColor)
     {
-        this.secondaryColor = secondaryColor;
+        this.secondaryColor = Color.rgb((int) (secondaryColor.getRed() * 255), (int) (secondaryColor.getGreen() * 255), (int) (secondaryColor.getBlue() * 255), opacity / 100.0D);
     }
   
     /**

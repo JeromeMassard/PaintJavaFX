@@ -11,8 +11,6 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -35,6 +33,12 @@ import paint.elements.components.Point;
 import paint.elements.components.Rectangle;
 import paint.elements.components.Square;
 import paint.elements.components.Text;
+import paint.elements.effects.colorations.BlackAndWhite;
+import paint.elements.effects.colorations.Sepia;
+import paint.elements.effects.deformations.Blur;
+import paint.elements.effects.deformations.Reflec;
+import paint.elements.effects.deformations.Shadow;
+import paint.elements.effects.deformations.Warp;
 
 /**
  * FXML Controller class
@@ -247,17 +251,8 @@ public class FXMLMainWinController implements Initializable {
 
             selectedComponent.draw(g);
             
-            
-            //TEST AUTO ACTUALISATION LAYER
-            //Layer l = (Layer) layerZone.getSelectionModel().getSelectedItem();
-            //WritableImage writableImage = new WritableImage(CANVAS_WIDTH, CANVAS_HEIGHT);
-            //l.setImage((Image)g.getCanvas().snapshot(null, writableImage));
-             
-             
-            
         }
 
-        //g.setEffect(new GaussianBlur(rand.nextInt(256)));
     }
 
     @Override
@@ -350,5 +345,57 @@ public class FXMLMainWinController implements Initializable {
                         saveFail.showAndWait();
                     }
                 }
+    }
+    
+    @FXML
+    public void setWarp()
+    {
+        GraphicsContext g = Lgc.get(tabContainer.getSelectionModel().getSelectedIndex());
+        Warp warp = new Warp();
+        warp.draw(g);
+      
+    }
+     
+    
+    @FXML
+    public void setGaussianBlur()
+    {
+        GraphicsContext g = Lgc.get(tabContainer.getSelectionModel().getSelectedIndex());
+        Blur blur = new Blur(7);
+        blur.draw(g);
+    }
+    
+    @FXML
+    public void setSepia()
+    {
+        GraphicsContext g = Lgc.get(tabContainer.getSelectionModel().getSelectedIndex());
+        Sepia sepia = new Sepia();
+        sepia.draw(g);
+        
+    }
+    
+    @FXML
+    public void setBlackAndWhite()
+    {
+        GraphicsContext g = Lgc.get(tabContainer.getSelectionModel().getSelectedIndex());
+        BlackAndWhite bw = new BlackAndWhite();
+        bw.draw(g);
+        
+    }
+    
+    @FXML
+    public void setReflec()
+    {
+        GraphicsContext g = Lgc.get(tabContainer.getSelectionModel().getSelectedIndex());
+        Reflec reflec = new Reflec();
+        reflec.draw(g);
+    }
+    
+    @FXML
+    public void setShadow()
+    {
+        GraphicsContext g = Lgc.get(tabContainer.getSelectionModel().getSelectedIndex());
+        Shadow shadow = new Shadow();
+        shadow.draw(g);
     }
 }

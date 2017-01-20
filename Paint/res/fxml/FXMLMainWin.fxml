@@ -137,14 +137,16 @@
                                     <items>
                                         <Menu mnemonicParsing="false" text="Deformation">
                                             <items>
-                                                <MenuItem mnemonicParsing="false" text="Bruit" />
-                                                <MenuItem mnemonicParsing="false" text="Flou gaussien" />
+                                                <MenuItem mnemonicParsing="false" text="Warp" onAction="#setWarp"/>
+                                                <MenuItem mnemonicParsing="false" text="Gaussian Blur" onAction="#setGaussianBlur"/>
                                             </items>
                                         </Menu>
                                         <Menu mnemonicParsing="false" text="Coloration">
                                             <items>
-                                                <MenuItem mnemonicParsing="false" text="Sepia" />
-                                                <MenuItem mnemonicParsing="false" text="Noir et Blanc" />
+                                                <MenuItem mnemonicParsing="false" text="Sepia" onAction="#setSepia" />
+                                                <MenuItem mnemonicParsing="false" text="Black And White" onAction="#setBlackAndWhite" />
+                                                <MenuItem mnemonicParsing="false" text="Reflection" onAction="#setReflec" />
+                                                <MenuItem mnemonicParsing="false" text="Shadow" onAction="#setShadow" />
                                             </items>
                                         </Menu>
                                     </items>

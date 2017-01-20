@@ -176,11 +176,10 @@
                         <ColorPicker fx:id="sColor" disable="true" prefWidth="50" />
                         <GridPane>
                             <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" />
                         <ColumnConstraints />
                                 
                             </columnConstraints>
@@ -190,7 +189,7 @@
                                 <Spinner fx:id="opac" amountToStepBy="1" initialValue="100" max="100" maxWidth="75" min="1" onMouseClicked="#onOpacityChanged" GridPane.columnIndex="1" />
                                 <Label text=" Size : " GridPane.columnIndex="2" />
                                 <Spinner fx:id="size" amountToStepBy="1" initialValue="8" max="100" maxWidth="75" min="1" onMouseClicked="#onSizeChanged" GridPane.columnIndex="3" />
-                                <CheckBox mnemonicParsing="false" text="Lisser" GridPane.columnIndex="5" />
+                                
                             </children>
                             <rowConstraints>
                                 <RowConstraints />

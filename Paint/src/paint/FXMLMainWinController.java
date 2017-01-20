@@ -1,8 +1,6 @@
 package paint;
 
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageFilter;
-import java.awt.image.RGBImageFilter;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
@@ -101,7 +99,7 @@ public class FXMLMainWinController implements Initializable {
         grid.add(cvs, 3, 2);
         newTab.setContent(cvs);
         GraphicsContext gc = cvs.getGraphicsContext2D();
-
+        
         tabContainer.getTabs().add(newTab);
         ++numeroTab;
     }
@@ -242,6 +240,7 @@ public class FXMLMainWinController implements Initializable {
             }
 
             selectedComponent.draw(g);
+            
         }
 
         //g.setEffect(new GaussianBlur(rand.nextInt(256)));

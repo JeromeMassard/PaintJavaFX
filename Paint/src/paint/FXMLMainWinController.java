@@ -2,10 +2,8 @@ package paint;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +18,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -29,7 +26,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
-import javax.imageio.stream.ImageOutputStream;
 import paint.elements.components.Brush;
 import paint.elements.components.Circle;
 import paint.elements.components.Component;
@@ -80,6 +76,8 @@ public class FXMLMainWinController implements Initializable {
     private int thickness;
     private Component selectedComponent;
     private String selectedMode;
+    
+    private List<GraphicsContext> Lgc = new ArrayList<GraphicsContext>();
 
     /* First X coord of the mouse */
     private int firstClickX = -1;
@@ -97,13 +95,18 @@ public class FXMLMainWinController implements Initializable {
         Tab newTab = new Tab();
         Canvas cvs = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
         newTab.setText("New Draw n°" + numeroTab);
-        newTab.setContent(cvs);
-        cvs.setId("canvas" + numeroTab);
-        grid.add(cvs, 3, 2);
-        newTab.setContent(cvs);
-        GraphicsContext gc = cvs.getGraphicsContext2D();
+        cvs.setId("cvs"+(Lgc.size()+1));
+
+        grid.add(cvs, 1, 2, 3, 1);
         
+        cvs.setOnMousePressed(e -> onMousePressed(e));
+        cvs.setOnMouseReleased(e -> onMouseReleased(e));
+        cvs.setOnMouseDragged(e -> onMouseDragged(e));
+        
+        newTab.setContent(cvs);
         tabContainer.getTabs().add(newTab);
+        GraphicsContext gc = cvs.getGraphicsContext2D();
+        Lgc.add(gc);
         ++numeroTab;
     }
 
@@ -174,9 +177,9 @@ public class FXMLMainWinController implements Initializable {
      * @param e 
      */
     @FXML
-    public void onMouseReleased(MouseEvent e) throws URISyntaxException {
-        GraphicsContext g = canvas.getGraphicsContext2D();
-
+    public void onMouseReleased(MouseEvent e) {
+        //GraphicsContext g = canvas.getGraphicsContext2D();
+        GraphicsContext g = Lgc.get(tabContainer.getSelectionModel().getSelectedIndex());
         secondClickX = (int) e.getX();
         secondClickY = (int) e.getY();
 
@@ -205,7 +208,7 @@ public class FXMLMainWinController implements Initializable {
                     break;
                 case "line":
                     selectedComponent = new Line(firstClickX, firstClickY, secondClickX, secondClickY);
-                    break;
+                        break;
                 case "oval":
                     selectedComponent = new Oval(x, y, width, height);
                     break;
@@ -244,12 +247,11 @@ public class FXMLMainWinController implements Initializable {
 
             selectedComponent.draw(g);
             
-            Layer l = (Layer) layerZone.getSelectionModel().getSelectedItem();
             
-            
-             WritableImage writableImage = new WritableImage(CANVAS_WIDTH, CANVAS_HEIGHT);
-             
-            l.setImage((Image)g.getCanvas().snapshot(null, writableImage));
+            //TEST AUTO ACTUALISATION LAYER
+            //Layer l = (Layer) layerZone.getSelectionModel().getSelectedItem();
+            //WritableImage writableImage = new WritableImage(CANVAS_WIDTH, CANVAS_HEIGHT);
+            //l.setImage((Image)g.getCanvas().snapshot(null, writableImage));
              
              
             
@@ -259,44 +261,17 @@ public class FXMLMainWinController implements Initializable {
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb){
         createBackgroundLayer();
         GraphicsContext gc = canvas.getGraphicsContext2D();
-
+        Lgc.add(gc);
+       
         fColor.setValue(Color.rgb(0, 0, 0, 1.0D));
         sColor.setValue(Color.rgb(255, 255, 255, 1.0D));
         shape.setValue("Brush");
         opacity = 100;
         thickness = 8;
-        /**
-         * Action de sauvegarde:
-         * ouvre un file chooser permettant de choisir l'emplacement d'enregistrement de
-         * l'image dessiné en *.png.
-         * En cas d'échec affiche une alert.
-         */
-        saveBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent t) {
-                FileChooser fileChooser = new FileChooser();
-                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Fichier PNG (*.png)", "*.png");
-                fileChooser.getExtensionFilters().add(extFilter);
-                File file = fileChooser.showSaveDialog(new Stage());
-                 
-                if (file != null) {
-                    try {
-                        BufferedImage buffer = new BufferedImage(CANVAS_WIDTH, CANVAS_HEIGHT, BufferedImage.TYPE_4BYTE_ABGR);
-                        WritableImage writableImage = SwingFXUtils.toFXImage(buffer, null);
-                        
-                        canvas.snapshot(null, writableImage);
-                        RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
-                        ImageIO.write(renderedImage, "png", file);
-                    } catch (IOException ex) {
-                        Alert saveFail = new Alert(Alert.AlertType.WARNING, "Echec de la sauvegarde",ButtonType.OK);
-                        saveFail.showAndWait();
-                    }
-                }
-            }
-        });
+        saveBtn.setOnAction(e->onSave());
     }
 
     public void setEnableSecondaryColor() {
@@ -335,7 +310,7 @@ public class FXMLMainWinController implements Initializable {
             selectedComponent.setSecondaryColor(sColor.getValue());
             
             selectedComponent.setPosition((int)e.getX(), (int)e.getY());
-            selectedComponent.draw(canvas.getGraphicsContext2D());
+            selectedComponent.draw(Lgc.get(tabContainer.getSelectionModel().getSelectedIndex()));
         }
     }
     
@@ -346,5 +321,34 @@ public class FXMLMainWinController implements Initializable {
     public void onSelectedMode()
     {
         selectedMode = shape.getValue().toString();
+    }
+    
+       
+    /**
+     * Action de sauvegarde:
+     * ouvre un file chooser permettant de choisir l'emplacement d'enregistrement de
+     * l'image dessiné en *.png.
+     * En cas d'échec affiche une alert.
+     */
+    public void onSave()
+    {
+                FileChooser fileChooser = new FileChooser();
+                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Fichier PNG (*.png)", "*.png");
+                fileChooser.getExtensionFilters().add(extFilter);
+                File file = fileChooser.showSaveDialog(new Stage());
+                 
+                if (file != null) {
+                        try {
+                        BufferedImage buffer = new BufferedImage(CANVAS_WIDTH, CANVAS_HEIGHT, BufferedImage.TYPE_4BYTE_ABGR);
+                        WritableImage writableImage = SwingFXUtils.toFXImage(buffer, null);
+                        
+                        Lgc.get(tabContainer.getSelectionModel().getSelectedIndex()).getCanvas().snapshot(null, writableImage);
+                        RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
+                        ImageIO.write(renderedImage, "png", file);
+                    } catch (IOException ex) {
+                        Alert saveFail = new Alert(Alert.AlertType.WARNING, "Echec de la sauvegarde",ButtonType.OK);
+                        saveFail.showAndWait();
+                    }
+                }
     }
 }

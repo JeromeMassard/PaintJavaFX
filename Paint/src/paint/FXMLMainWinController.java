@@ -2,8 +2,10 @@ package paint;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageOutputStream;
 import paint.elements.components.Brush;
 import paint.elements.components.Circle;
 import paint.elements.components.Component;
@@ -171,7 +174,7 @@ public class FXMLMainWinController implements Initializable {
      * @param e 
      */
     @FXML
-    public void onMouseReleased(MouseEvent e) {
+    public void onMouseReleased(MouseEvent e) throws URISyntaxException {
         GraphicsContext g = canvas.getGraphicsContext2D();
 
         secondClickX = (int) e.getX();
@@ -241,6 +244,15 @@ public class FXMLMainWinController implements Initializable {
 
             selectedComponent.draw(g);
             
+            Layer l = (Layer) layerZone.getSelectionModel().getSelectedItem();
+            
+            
+             WritableImage writableImage = new WritableImage(CANVAS_WIDTH, CANVAS_HEIGHT);
+             
+            l.setImage((Image)g.getCanvas().snapshot(null, writableImage));
+             
+             
+            
         }
 
         //g.setEffect(new GaussianBlur(rand.nextInt(256)));
@@ -256,7 +268,12 @@ public class FXMLMainWinController implements Initializable {
         shape.setValue("Brush");
         opacity = 100;
         thickness = 8;
-        
+        /**
+         * Action de sauvegarde:
+         * ouvre un file chooser permettant de choisir l'emplacement d'enregistrement de
+         * l'image dessiné en *.png.
+         * En cas d'échec affiche une alert.
+         */
         saveBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
@@ -274,7 +291,8 @@ public class FXMLMainWinController implements Initializable {
                         RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
                         ImageIO.write(renderedImage, "png", file);
                     } catch (IOException ex) {
-                        System.out.println(ex);
+                        Alert saveFail = new Alert(Alert.AlertType.WARNING, "Echec de la sauvegarde",ButtonType.OK);
+                        saveFail.showAndWait();
                     }
                 }
             }

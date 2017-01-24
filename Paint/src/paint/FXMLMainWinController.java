@@ -81,7 +81,7 @@ public class FXMLMainWinController implements Initializable {
     private Component selectedComponent;
     private String selectedMode;
     
-    private List<GraphicsContext> Lgc = new ArrayList<GraphicsContext>();
+    private List<GraphicsContext> lgc = new ArrayList<GraphicsContext>();
 
     /* First X coord of the mouse */
     private int firstClickX = -1;
@@ -99,7 +99,7 @@ public class FXMLMainWinController implements Initializable {
         Tab newTab = new Tab();
         Canvas cvs = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
         newTab.setText("New Draw n°" + numeroTab);
-        cvs.setId("cvs"+(Lgc.size()+1));
+        cvs.setId("cvs"+(lgc.size()+1));
 
         grid.add(cvs, 1, 2, 3, 1);
         
@@ -110,7 +110,7 @@ public class FXMLMainWinController implements Initializable {
         newTab.setContent(cvs);
         tabContainer.getTabs().add(newTab);
         GraphicsContext gc = cvs.getGraphicsContext2D();
-        Lgc.add(gc);
+        lgc.add(gc);
         ++numeroTab;
     }
 
@@ -183,7 +183,7 @@ public class FXMLMainWinController implements Initializable {
     @FXML
     public void onMouseReleased(MouseEvent e) {
         //GraphicsContext g = canvas.getGraphicsContext2D();
-        GraphicsContext g = Lgc.get(tabContainer.getSelectionModel().getSelectedIndex());
+        GraphicsContext g = lgc.get(tabContainer.getSelectionModel().getSelectedIndex());
         secondClickX = (int) e.getX();
         secondClickY = (int) e.getY();
 
@@ -259,7 +259,7 @@ public class FXMLMainWinController implements Initializable {
     public void initialize(URL url, ResourceBundle rb){
         createBackgroundLayer();
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        Lgc.add(gc);
+        lgc.add(gc);
        
         fColor.setValue(Color.rgb(0, 0, 0, 1.0D));
         sColor.setValue(Color.rgb(255, 255, 255, 1.0D));
@@ -279,8 +279,8 @@ public class FXMLMainWinController implements Initializable {
 
     @FXML
     public void onOpacityChanged() {
-        SpinnerValueFactory<Integer> valueFactory = opac.getValueFactory();
-        opacity = valueFactory.getValue();
+        SpinnerValueFactory<Double> valueFactory = opac.getValueFactory();
+        opacity = valueFactory.getValue().intValue();
     }
     
     /**
@@ -288,8 +288,8 @@ public class FXMLMainWinController implements Initializable {
      */
     @FXML
     public void onSizeChanged() {
-        SpinnerValueFactory<Integer> valueFactory = size.getValueFactory();
-        thickness = valueFactory.getValue();
+        SpinnerValueFactory<Double> valueFactory = size.getValueFactory();
+        thickness = valueFactory.getValue().intValue();
     }
     
     /**
@@ -305,7 +305,7 @@ public class FXMLMainWinController implements Initializable {
             selectedComponent.setSecondaryColor(sColor.getValue());
             
             selectedComponent.setPosition((int)e.getX(), (int)e.getY());
-            selectedComponent.draw(Lgc.get(tabContainer.getSelectionModel().getSelectedIndex()));
+            selectedComponent.draw(lgc.get(tabContainer.getSelectionModel().getSelectedIndex()));
         }
     }
     
@@ -337,7 +337,7 @@ public class FXMLMainWinController implements Initializable {
                         BufferedImage buffer = new BufferedImage(CANVAS_WIDTH, CANVAS_HEIGHT, BufferedImage.TYPE_4BYTE_ABGR);
                         WritableImage writableImage = SwingFXUtils.toFXImage(buffer, null);
                         
-                        Lgc.get(tabContainer.getSelectionModel().getSelectedIndex()).getCanvas().snapshot(null, writableImage);
+                        lgc.get(tabContainer.getSelectionModel().getSelectedIndex()).getCanvas().snapshot(null, writableImage);
                         RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
                         ImageIO.write(renderedImage, "png", file);
                     } catch (IOException ex) {
@@ -350,7 +350,7 @@ public class FXMLMainWinController implements Initializable {
     @FXML
     public void setWarp()
     {
-        GraphicsContext g = Lgc.get(tabContainer.getSelectionModel().getSelectedIndex());
+        GraphicsContext g = lgc.get(tabContainer.getSelectionModel().getSelectedIndex());
         Warp warp = new Warp();
         warp.draw(g);
       
@@ -360,7 +360,7 @@ public class FXMLMainWinController implements Initializable {
     @FXML
     public void setGaussianBlur()
     {
-        GraphicsContext g = Lgc.get(tabContainer.getSelectionModel().getSelectedIndex());
+        GraphicsContext g = lgc.get(tabContainer.getSelectionModel().getSelectedIndex());
         Blur blur = new Blur(7);
         blur.draw(g);
     }
@@ -368,7 +368,7 @@ public class FXMLMainWinController implements Initializable {
     @FXML
     public void setSepia()
     {
-        GraphicsContext g = Lgc.get(tabContainer.getSelectionModel().getSelectedIndex());
+        GraphicsContext g = lgc.get(tabContainer.getSelectionModel().getSelectedIndex());
         Sepia sepia = new Sepia();
         sepia.draw(g);
         
@@ -377,7 +377,7 @@ public class FXMLMainWinController implements Initializable {
     @FXML
     public void setBlackAndWhite()
     {
-        GraphicsContext g = Lgc.get(tabContainer.getSelectionModel().getSelectedIndex());
+        GraphicsContext g = lgc.get(tabContainer.getSelectionModel().getSelectedIndex());
         BlackAndWhite bw = new BlackAndWhite();
         bw.draw(g);
         
@@ -386,7 +386,7 @@ public class FXMLMainWinController implements Initializable {
     @FXML
     public void setReflec()
     {
-        GraphicsContext g = Lgc.get(tabContainer.getSelectionModel().getSelectedIndex());
+        GraphicsContext g = lgc.get(tabContainer.getSelectionModel().getSelectedIndex());
         Reflec reflec = new Reflec();
         reflec.draw(g);
     }
@@ -394,7 +394,7 @@ public class FXMLMainWinController implements Initializable {
     @FXML
     public void setShadow()
     {
-        GraphicsContext g = Lgc.get(tabContainer.getSelectionModel().getSelectedIndex());
+        GraphicsContext g = lgc.get(tabContainer.getSelectionModel().getSelectedIndex());
         Shadow shadow = new Shadow();
         shadow.draw(g);
     }
